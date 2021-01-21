@@ -1,0 +1,21 @@
+<h1 class="form-title">ログイン</h1>
+
+<div class="Form">
+  <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+
+    <div class="Form-Item">
+      <%= f.label :メールアドレス, class:"Form-Item-Label" %>
+      <%= f.email_field :email, class:"Form-Item-Input" %>
+    </div>
+
+    <div class="Form-Item">  
+      <%= f.label :パスワード, class:"Form-Item-Label" %>
+      <%= f.password_field :password, class:"Form-Item-Input" %>
+    </div> 
+
+    <%= f.submit "送信する", class:"Form-Btn" %>
+
+  <% end %>
+
+  <p>登録はお済みですか？<%= link_to "新規登録", signup_path %></p>
+</div>
