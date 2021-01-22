@@ -213,3 +213,88 @@ nav {
   justify-content: center;
   margin-top: 30px;
 }
+
+/*profile*/
+
+.body {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: grid;
+  grid-template:
+                "..... ..... ..... ....." 150px
+                "..... item1 item2 ....." auto
+                "..... item3 item3 ....." auto
+                "..... item4 item4 ....." auto
+                "..... ..... ..... ....." auto
+                /auto 40% 40% auto;
+  overflow-x: hidden;
+  table-layout: fixed;
+}
+
+.image {
+  text-align: center;
+  size: 150px;
+  padding: 2rem;
+}
+​
+.wrapper {
+  position: relative;
+}
+
+img {
+  width: 100%;
+}
+
+.item-name {
+  font-size: 25px;
+  border-bottom: solid 4px;
+}
+
+.item1 {
+  grid-area: item1;
+}
+
+.item2 {
+  grid-area: item2;
+  text-align: center;
+  margin-top: 100px;
+  .name {
+    font-size: 25px;
+    border-bottom: solid 3px;
+  }
+  .profile-text {
+    font-size: medium;
+  }
+}
+
+.item3 {
+  grid-area: item3;
+  display: flex-box;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.item4 {
+  grid-area: item4;
+  text-align: center;
+  margin-top: 50px;
+  .achives {
+    border: solid 1px black;
+    border-radius: 3px;
+    box-shadow: black;
+    margin-top: 10px;
+    height: 200px;
+    .achive-title {
+      font-size: 20px;
+    }
+    p {
+      font-size: 15px;
+      color: gray;
+    }
+  }
+}
+
+audio {
+  margin: 50px 0 50px 0;
+}

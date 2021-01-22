@@ -5,6 +5,10 @@ ruby '2.6.6'
 
 gem 'bcrypt',         '3.1.13'
 
+gem 'carrierwave', '~> 2.0'
+
+gem 'pg'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.1'
 # Use sqlite3 as the database for Active Record
