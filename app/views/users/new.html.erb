@@ -2,26 +2,35 @@
 
 <div class="Form">
   <%= form_with(model: @user, local: true) do |f| %>
+    
+    <%= render 'shared/error_messages' %>
+
     <div class="Form-Item">
       <%= f.label :名前, class:"Form-Item-Label" %>
       <%= f.text_field :name, class:"Form-Item-Input" %>
     </div>
+
     <div class="Form-Item">
       <%= f.label :メールアドレス, class:"Form-Item-Label" %>
       <%= f.email_field :email, class:"Form-Item-Input" %>
     </div>
+
     <div class="Form-Item">  
       <%= f.label :パスワード, class:"Form-Item-Label" %>
       <%= f.password_field :password, class:"Form-Item-Input" %>
     </div> 
+
     <div class="Form-Item">
       <%= f.label :パスワード確認, class:"Form-Item-Label" %>
       <%= f.password_field :password_confirmation, class:"Form-Item-Input" %>
     </div>
+
     <div class="field">
       <%= f.label :プロフィール画像 %>
       <%= f.file_field :avatar %>
     </div>
+
     <%= f.submit "送信する", class:"Form-Btn" %>
+
   <% end %>
 </div>

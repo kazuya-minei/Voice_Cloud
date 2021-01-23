@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 * {
   box-sizing: border-box;
   color: rgb(0, 0, 0);
@@ -214,6 +217,33 @@ nav {
   margin-top: 30px;
 }
 
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.alert {
+  margin-top: 100px;
+}
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  li {
+    color: red;
+  }
+}
+
 /*profile*/
 
 .body {
@@ -252,6 +282,33 @@ img {
 
 .item1 {
   grid-area: item1;
+}
+
+.image-icon {
+  position: relative;
+}
+
+.image-icon::before,
+.image-icon::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.image-icon::before {
+  top: -15px;
+  right: -15px;
+  border-width: 0 100px 100px 0;
+  border-color: transparent #223974 transparent transparent;
+}
+
+.image-icon::after {
+  bottom: -15px;
+  left: -15px;
+  border-width: 100px 0 0 100px;
+  border-color: transparent transparent transparent #223974;
 }
 
 .item2 {
