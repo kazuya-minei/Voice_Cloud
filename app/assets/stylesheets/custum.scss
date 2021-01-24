@@ -51,13 +51,13 @@ img {
   object-fit: cover;
 }
 
-/* forms */
-
-.form-title{
+.title{
   font-size: 30px;
   text-align: center;
-  padding-top: 120px;
+  padding-top: 100px;
 }
+
+/* forms */
 
 .Form {
   margin-top: 80px;
@@ -255,7 +255,7 @@ img {
   min-height: 100vh;
   display: grid;
   grid-template:
-                "..... ..... ..... ....." 150px
+                "..... ..... ..... ....." 20px
                 "..... item1 item2 ....." auto
                 "..... item3 item3 ....." auto
                 "..... item4 item4 ....." auto
@@ -333,11 +333,6 @@ audio {
 
 
 /* Users */
-
-.h1 {
-  text-align: center;
-  margin-top: 90px;
-}
 
 .users {
   display: flex;

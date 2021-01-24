@@ -40,4 +40,5 @@ class User < ApplicationRecord
   end
   
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :voice_s, VoiceSampleUploader
 end

@@ -1,4 +1,4 @@
-<h1 class="h1">List of Voice Actors</h1>
+<h1 class="title">List of Voice Actors</h1>
 
 <%= will_paginate %>
 
@@ -7,10 +7,13 @@
     <div class="one-user">
       <%= image_tag user.avatar.url, size: 150 %>
       <%= link_to user.name, user %>
+      <% if user.voice_s? %>
+        <%= audio_tag user.voice_s.url, controls: true %>
+      <% end %>
+
       <% if current_user.admin? && !current_user?(user) %>
       | <%= link_to "delete", user, method: :delete, data: { confirm: "削除しますか?" } %>
       <% end %>
-      <audio controls><sorce src="#" alt="この声優のボイスサンプルです"></audio>
     </div>
   <% end %>
 </div>

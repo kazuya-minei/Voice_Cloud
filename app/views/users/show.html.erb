@@ -1,3 +1,5 @@
+<h1 class="title">プロフィール</h1>
+
 <div class="body">
   <div class="item1 image">
     <div class="image-icon">
@@ -13,10 +15,12 @@
     </h1>
   </div>
 
-  <div class="item3">
-    <h1 class="item-name">Voice Smple</h1>
-    <audio controls><sorce src="#" alt="この声優のボイスサンプルです"></audio>
-  </div>
+  <% if @user.voice_s? %>
+    <div class="item3">
+      <h1 class="item-name">Voice Smple</h1>
+      <%= audio_tag @user.voice_s.url, controls: true %>
+    </div>
+  <% end %>
 
   <div class="item4">
     <h1 class="item-name">実績</h1>

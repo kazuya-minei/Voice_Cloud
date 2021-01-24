@@ -13,6 +13,14 @@ gem 'bootstrap-sass', '3.4.1'
 
 gem 'rails-i18n'
 
+gem 'fog-aws'
+
+gem 'dotenv-rails'
+
+gem 'audiojs-rails'
+
+gem 'carrierwave-audio'
+
 gem 'faker',                   '2.1.2'
 
 gem 'will_paginate',           '3.1.8'
