@@ -22,7 +22,7 @@ header {
   align-items: center;
 }
 
-h1 {
+.copy {
   margin: 0; padding: 0;
   font-size: 20px;
 }
@@ -45,6 +45,10 @@ li {
 
 nav {
   margin: 0 0 0 auto;
+}
+
+img {
+  object-fit: cover;
 }
 
 /* forms */
@@ -271,10 +275,6 @@ nav {
   position: relative;
 }
 
-img {
-  width: 100%;
-}
-
 .item-name {
   font-size: 25px;
   border-bottom: solid 4px;
@@ -284,32 +284,7 @@ img {
   grid-area: item1;
 }
 
-.image-icon {
-  position: relative;
-}
 
-.image-icon::before,
-.image-icon::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-}
-
-.image-icon::before {
-  top: -15px;
-  right: -15px;
-  border-width: 0 100px 100px 0;
-  border-color: transparent #223974 transparent transparent;
-}
-
-.image-icon::after {
-  bottom: -15px;
-  left: -15px;
-  border-width: 100px 0 0 100px;
-  border-color: transparent transparent transparent #223974;
-}
 
 .item2 {
   grid-area: item2;
@@ -354,4 +329,24 @@ img {
 
 audio {
   margin: 50px 0 50px 0;
+}
+
+
+/* Users */
+
+.h1 {
+  text-align: center;
+  margin-top: 90px;
+}
+
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.one-user {
+  width: 70%;
+  height: 150px;
+  margin-bottom: 10px;
 }

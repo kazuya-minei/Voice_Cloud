@@ -1,14 +1,15 @@
 <header>
-  <h1>  
+  <h1 class="copy">  
     <%= link_to "Voice Cloud", root_path %>
   </h1>
   <nav class="pc-nav">
     <ul>
       <% if logged_in? %>
         <li><%= link_to "投稿ボイス一覧", "#" %></li>
-        <li><%= link_to "お題一覧", "#" %></li>
-        <li><%= link_to "ユーザー一覧", "#" %></li>
+        <li><%= link_to "仕事を探す", "#" %></li>
+        <li><%= link_to "声優を探す", users_path %></li>
         <li><%= link_to "プロフィール", current_user %></li>
+        <li><%= link_to "プロフィール編集", edit_user_path(current_user) %></li>
         <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
       <% else %>
         <li><%= link_to "ログイン", login_path %></li>

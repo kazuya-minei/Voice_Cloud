@@ -1,4 +1,4 @@
-<h1 class="form-title">サインアップ</h1>
+<h1 class="form-title">プロフィール編集</h1>
 
 <div class="Form">
   <%= form_with(model: @user, local: true) do |f| %>
@@ -23,6 +23,11 @@
     <div class="Form-Item">
       <%= f.label :パスワード確認, class:"Form-Item-Label" %>
       <%= f.password_field :password_confirmation, class:"Form-Item-Input" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :プロフィール画像 %>
+      <%= f.file_field :avatar %>
     </div>
 
     <%= f.submit "送信する", class:"Form-Btn" %>
