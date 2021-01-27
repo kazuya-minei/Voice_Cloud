@@ -9,4 +9,10 @@ ja:
         password: パスワード
         avatar: プロフィール画像
         voice_s: ボイスサンプル
-      
+        introduction_text: 紹介文
+    models:
+      work: 依頼
+    attributes:
+      work:
+        title: 依頼名
+        content: 依頼内容
