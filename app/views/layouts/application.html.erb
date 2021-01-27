@@ -8,13 +8,13 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="/audiojs/audio.min.js"></script>
-    <script>
-      audiojs.events.ready(function() {
-         audiojs.createAll();
-      });
-    </script>
   </head>
+
+  <script>
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+  });
+  </script>
 
   <body>
     <%= render 'layouts/header' %>

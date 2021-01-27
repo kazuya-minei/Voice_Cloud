@@ -1,4 +1,4 @@
-<h1 class="title">プロフィール</h1>
+<h1 class="title">Profile</h1>
 
 <div class="body">
   <div class="item1 image">
@@ -18,23 +18,14 @@
   <% if @user.voice_s? %>
     <div class="item3">
       <h1 class="item-name">Voice Smple</h1>
-      <%= audio_tag @user.voice_s.url, controls: true %>
+      <%= audio_tag @user.voice_s.url, controls:true %>
     </div>
   <% end %>
 
-  <div class="item4">
-    <h1 class="item-name">実績</h1>
-    <div class="achives">
-      <hi class="achive-title">ナレーション</h1>
-      <p>このナレーションをお願いします</p>
+  <% if @user.works.any? %>
+    <div class="item4">
+      <h1 class="item-name">現在声優募集中の仕事</h1>
+      <%= render 'works/works' %>
     </div>
-    <div class="achives">
-      <hi class="achive-title">ナレーション</h1>
-      <p>このナレーションをお願いします</p>
-    </div>
-    <div class="achives">
-      <hi class="achive-title">ナレーション</h1>
-      <p>このナレーションをお願いします</p>
-    </div>
-  </div>
+  <% end %>
 </div>

@@ -2,7 +2,6 @@
 
 <div class="Form">
   <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
-
     <div class="Form-Item">
       <%= f.label :メールアドレス, class:"Form-Item-Label" %>
       <%= f.email_field :email, class:"Form-Item-Input" %>

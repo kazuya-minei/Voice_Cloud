@@ -1,0 +1,18 @@
+<h1 class="title">List of Jobs</h1>
+
+<%= will_paginate %>
+
+  <div class="items">
+    <% @works.each do |work| %>
+      <div class="one-item">
+      <h2 class="work-title"><%= link_to work.title, work %></h2>
+      <p class="work-content"><%= work.content %></p>
+      <% if current_user?(work.user) %>
+        <%= link_to "編集する", edit_work_path(work) %> 
+        <%= link_to "削除する", work, method: :delete, data: { confirm: "削除しますか?" } %>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+
+<%= will_paginate %>

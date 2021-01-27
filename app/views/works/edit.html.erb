@@ -1,0 +1,21 @@
+<h1 class="title">仕事内容を編集</h1>
+
+<div class="Form">
+  <%= form_with(model: @work, local: true) do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+    
+    <div class="Form-Item">
+      <%= f.label :タイトル, class:"Form-Item-Label" %>
+      <%= f.text_field :title, class:"Form-Item-Input" %>
+    </div>
+
+    <div class="Form-Item">
+      <%= f.label :詳細, class:"Form-Item-Label" %>
+      <%= f.text_field :content, class:"Form-Item-Input" %>
+    </div>
+
+    <%= f.submit "送信する", class:"Form-Btn" %>
+
+  <% end %>
+</div>

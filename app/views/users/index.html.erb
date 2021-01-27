@@ -2,9 +2,9 @@
 
 <%= will_paginate %>
 
-<div class="users">
+<div class="items">
   <% @users.each do |user| %>
-    <div class="one-user">
+    <div class="one-item user">
       <%= image_tag user.avatar.url, size: 150 %>
       <%= link_to user.name, user %>
       <% if user.voice_s? %>

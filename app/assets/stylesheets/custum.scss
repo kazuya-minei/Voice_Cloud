@@ -1,5 +1,26 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@mixin shadow-hover {
+  box-shadow: 0 0 3px 0 rgba(0,0,0,.12), 0 2px 3px 0 rgba(0,0,0,.22);
+  transition: .3s;
+  &:hover{
+    box-shadow: 0 15px 30px -5px rgba(0, 111, 180, 0.5), 0 0 5px rgba(0, 111, 180, 0.5);
+    transform: translateY(-3px);
+  }
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.one-item {
+  width: 70%;
+  height: 150px;
+  margin-bottom: 10px;
+  @include shadow-hover
+}
 
 * {
   box-sizing: border-box;
@@ -310,14 +331,14 @@ img {
 .item4 {
   grid-area: item4;
   text-align: center;
-  margin-top: 50px;
-  .achives {
-    border: solid 1px black;
+  .works {
+    border: solid 1px rgb(201, 201, 201);
     border-radius: 3px;
     box-shadow: black;
     margin-top: 10px;
-    height: 200px;
-    .achive-title {
+    height: 150px;
+    @include shadow-hover
+    .work-title {
       font-size: 20px;
     }
     p {
@@ -328,20 +349,33 @@ img {
 }
 
 audio {
-  margin: 50px 0 50px 0;
+  margin: 25px 0 25px 0;
 }
 
 
 /* Users */
 
-.users {
+.items {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
-.one-user {
-  width: 70%;
-  height: 150px;
-  margin-bottom: 10px;
+.user {
+  justify-content: flex-start;
 }
+
+/* Works */
+
+.items {
+  box-shadow: black;
+  .one-item {
+    text-align: center;
+  }
+  .work-title {
+    font-size: 20px;
+  }
+  p {
+    font-size: 15px;
+    color: gray;
+  }
+}
+

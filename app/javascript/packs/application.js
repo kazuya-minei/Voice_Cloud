@@ -11,4 +11,5 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-//= require ('audiojs/audio')
+
+require ('audiojs/audio')

@@ -40,6 +40,14 @@ class VoiceSampleUploader < CarrierWave::Uploader::Base
      %w(wave mp3 wav)
    end
 
+  # version :mp3 do
+  #   process :convert => [{output_format: :mp3}]
+
+  #   def full_filename(for_file)
+  #     "#{super.chomp(File.extname(super))}.mp3"
+  #   end
+  # end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
