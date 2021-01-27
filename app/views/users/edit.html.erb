@@ -17,8 +17,12 @@
 
     <div class="Form-Item">
       <%= f.label :紹介文, class:"Form-Item-Label" %>
-      <%= f.text_area :introduction_text, class:"Form-Item-Textarea" %>
+      <%= f.text_area :introduction_text, class:"Form-Item-Textarea user-text" %>
     </div>
+    <div class="text-count">
+      <p class="user-text-count"></p>
+    </div>
+
 
     <div class="field">
       <%= f.label :プロフィール画像 %>

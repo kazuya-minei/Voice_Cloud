@@ -1,4 +1,4 @@
-<h1 class="title">募集内容を記入</h1>
+<h1 class="title">依頼内容を記入</h1>
 
 <div class="Form">
   <%= form_with(model: @work, local: true) do |f| %>
@@ -11,8 +11,12 @@
     </div>
 
     <div class="Form-Item">
-      <%= f.label :詳細, class:"Form-Item-Label" %>
-      <%= f.text_area :content, class:"Form-Item-Textarea" %>
+      <%= f.label :依頼詳細, class:"Form-Item-Label" %>
+      <%= f.text_area :content, class:"Form-Item-Textarea work-text" %>
+    </div>
+
+    <div class="text-count">
+      <p class="work-text-count"></p>
     </div>
 
     <%= f.submit "送信する", class:"Form-Btn" %>
