@@ -64,6 +64,10 @@ li {
   font-size: 14px;
 }
 
+p {
+  white-space: pre-wrap;
+}
+
 nav {
   margin: 0 0 0 auto;
 }
@@ -184,7 +188,7 @@ img {
   margin-left: 40px;
   padding-left: 1em;
   padding-right: 1em;
-  height: 216px;
+  height: 400px;
   flex: 1;
   width: 100%;
   max-width: 410px;
@@ -376,6 +380,10 @@ audio {
   p {
     font-size: 15px;
     color: gray;
+    display: -webkit-box;    /*表示文字数制限*/
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
   }
 }
 
