@@ -8,7 +8,7 @@
       <%= image_tag user.avatar.url, size: 150 %>
       <%= link_to user.name, user %>
       <% if user.voice_s? %>
-        <%= audio_tag user.voice_s.url, controls: true %>
+        <%= audio_tag user.voice_s.url %>
       <% end %>
 
       <% if current_user.admin? && !current_user?(user) %>
