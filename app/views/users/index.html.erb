@@ -11,8 +11,10 @@
         <%= audio_tag user.voice_s.url %>
       <% end %>
 
-      <% if current_user.admin? && !current_user?(user) %>
-      | <%= link_to "delete", user, method: :delete, data: { confirm: "削除しますか?" } %>
+      <% if logged_in? %>
+        <% if current_user.admin? && !current_user?(user) %>
+        | <%= link_to "delete", user, method: :delete, data: { confirm: "削除しますか?" } %>
+        <% end %>
       <% end %>
     </div>
   <% end %>

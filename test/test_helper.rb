@@ -9,5 +9,25 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  # テストユーザーログイン中にtrue
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
+
+  # テストユーザーとしてログインする
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+
+  # Add more helper methods to be used by all tests here..
+end
+
+class ActionDispatch::IntegrationTest  #統合テストではこっちのlog_in_asが呼び出される
+
+  # テストユーザーとしてログインする 
+  def log_in_as(user, password: 'password', remember_me: '1')
+    post login_path, params: { session: { email: user.email,  #POSTリクエストを送る
+                                          password: password,
+                                          remember_me: remember_me } }
+  end
 end

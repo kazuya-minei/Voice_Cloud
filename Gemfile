@@ -17,8 +17,6 @@ gem 'fog-aws'
 
 gem 'dotenv-rails'
 
-gem 'audiojs-rails'
-
 gem 'carrierwave-audio'
 
 gem 'faker',                   '2.1.2'
@@ -26,6 +24,8 @@ gem 'faker',                   '2.1.2'
 gem 'will_paginate',           '3.1.8'
 
 gem 'bootstrap-will_paginate', '1.0.0'
+
+gem 'rails-controller-testing'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.1'
@@ -53,6 +53,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'rspec-rails'
+
+  gem 'factory_bot_rails'
 end
 
 group :development do

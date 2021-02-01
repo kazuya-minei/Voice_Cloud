@@ -12,7 +12,5 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-// require('audiojs/audio.js')
-
 require('jquery')
 require('counting')

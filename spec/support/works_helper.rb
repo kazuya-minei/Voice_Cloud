@@ -1,0 +1,2 @@
+module WorkMacros
+end
