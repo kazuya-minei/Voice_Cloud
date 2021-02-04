@@ -1,2 +1,6 @@
 <h1 class="title"><%= @work.title %></h1>
 <p><%= @work.content %></p>
+<% if current_user?(@work.user) %>
+  <%= link_to "編集する", edit_work_path(@work), data: {"turbolinks" => false} %> 
+  <%= link_to "削除する", @work, method: :delete, data: { confirm: "削除しますか?"} %>
+<% end %>
