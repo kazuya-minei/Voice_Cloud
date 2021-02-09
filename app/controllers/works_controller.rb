@@ -40,7 +40,7 @@ class WorksController < ApplicationController
 
   def destroy
     @work.destroy
-    flash[:success] = "依頼を削除しました"
+    flash[:success] = "お題を削除しました"
     redirect_to works_url
   end
 

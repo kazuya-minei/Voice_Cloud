@@ -1,4 +1,4 @@
-<h1 class="title">依頼内容を編集</h1>
+<h1 class="title">お題内容を編集</h1>
 
 <div class="Form">
   <%= form_with(model: @work, local: true) do |f| %>
@@ -11,7 +11,7 @@
     </div>
 
     <div class="Form-Item">
-      <%= f.label :依頼詳細, class:"Form-Item-Label" %>
+      <%= f.label :お題詳細, class:"Form-Item-Label" %>
       <%= f.text_area :content, class:"Form-Item-Textarea work-text" %>
     </div>
 

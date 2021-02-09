@@ -288,6 +288,7 @@ img {
   grid-template:
                 "..... ..... ..... ....." 20px
                 "..... item1 item2 ....." auto
+                "..... follow item2 ...." auto
                 "..... item3 item3 ....." auto
                 "..... item4 item4 ....." auto
                 "..... ..... ..... ....." auto
@@ -313,6 +314,10 @@ img {
 
 .item1 {
   grid-area: item1;
+}
+
+.follow {
+  grid-area: follow;
 }
 
 
@@ -393,3 +398,14 @@ audio {
   }
 }
 
+/* follower,followed */
+
+.no-connection {
+  text-align: center;
+  padding: 250px 0px 250px 0px;
+  color: #858585;
+}
+
+.follow {
+  height: 500px;
+}

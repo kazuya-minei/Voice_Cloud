@@ -1,0 +1,21 @@
+<h1 class="title">フォロワー</h1>
+  
+<%= will_paginate %>
+
+<% if @users.any? %>
+  <div class="items">
+    <% @users.each do |user| %>
+      <div class="one-item user">
+        <%= image_tag user.avatar.url, size: 150 %>
+        <%= link_to user.name, user %>
+        <% if user.voice_s? %>
+          <%= audio_tag user.voice_s.url %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class ="no-connection">現在フォロワーはいません</p>
+<% end %>
+
+<%= will_paginate %>

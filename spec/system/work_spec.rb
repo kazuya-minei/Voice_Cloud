@@ -49,16 +49,16 @@ RSpec.feature "work", type: :system do
         expect(page).to have_content 'タイトルは20文字以内で入力してください'
       end
 
-      it '依頼詳細は空だと投稿失敗' do
+      it 'お題詳細は空だと投稿失敗' do
         fill_in 'work[content]', with: ''
         find('#submission').click
-        expect(page).to have_content '依頼詳細を入力してください' 
+        expect(page).to have_content 'お題詳細を入力してください' 
       end
 
       it '以来詳細は2001文字以上は投稿失敗' do
         fill_in 'work[content]', with: 'a' * 2001
         find('#submission').click
-        expect(page).to have_content '依頼詳細は2000文字以内で入力してください'
+        expect(page).to have_content 'お題詳細は2000文字以内で入力してください'
       end
     end
   end
@@ -94,7 +94,7 @@ RSpec.feature "work", type: :system do
         fill_in 'work[content]', with: ''
         find('#update').click
         expect(page).to have_content 'タイトルを入力してください'
-        expect(page).to have_content '依頼詳細を入力してください'
+        expect(page).to have_content 'お題詳細を入力してください'
       end
 
     end
@@ -130,7 +130,7 @@ RSpec.feature "work", type: :system do
 
       it '正常に削除され、一覧ページにリダイレクトされる' do
         click_link '削除する'
-        expect(page).to have_content '依頼を削除しました'
+        expect(page).to have_content 'お題を削除しました'
         expect(current_path).to eq works_path
       end
     end

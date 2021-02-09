@@ -6,10 +6,10 @@
     <ul>
       <% if logged_in? %>
       
-        <li><%= link_to "依頼を投稿する", new_work_path,
+        <li><%= link_to "お題を投稿する", new_work_path,
                                           data: {"turbolinks" => false} %></li>
 
-        <li><%= link_to "依頼を探す", works_path %></li>
+        <li><%= link_to "お題を探す", works_path %></li>
 
         <li><%= link_to "声優を探す", users_path, 
                                       data: {"turbolinks" => false} %></li>

@@ -12,7 +12,7 @@ ja:
         admin: 管理者フラグ
       work:
         title: タイトル
-        content: 依頼詳細
+        content: お題詳細
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
