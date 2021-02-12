@@ -32,7 +32,7 @@ RSpec.describe "Works", type: :request do
 
     context "ログイン済の場合" do
       before do
-        sign_in_as user
+        sign_in user
         get work_path(work)
       end
 
@@ -57,7 +57,7 @@ RSpec.describe "Works", type: :request do
 
     context "ログイン済の場合" do
       before do
-        sign_in_as user
+        sign_in user
         get work_path(work)
       end
 
@@ -85,7 +85,7 @@ RSpec.describe "Works", type: :request do
 
     context "ログイン済の場合" do
       before do
-        sign_in_as user
+        sign_in user
         post works_path, params: { work: work_params}
       end
       it "正常にレスポンスが返ってくる" do
@@ -115,7 +115,7 @@ RSpec.describe "Works", type: :request do
     
     context "本人ではない場合" do
       before do
-        sign_in_as user2
+        sign_in user2
         get edit_work_path work
       end
       it "正常にレスポンスが返ってくる" do
@@ -128,7 +128,7 @@ RSpec.describe "Works", type: :request do
 
     context "本人の場合" do
       before do
-        sign_in_as user
+        sign_in user
         get edit_work_path work
       end
       it "正常にレスポンスが返ってくる" do
@@ -152,7 +152,7 @@ RSpec.describe "Works", type: :request do
     end
     context "本人ではない場合" do
       before do
-        sign_in_as user2
+        sign_in user2
         patch '/works/' + work.id.to_s, params: new_work_parms 
       end
       it "正常にレスポンスが返ってくる" do
@@ -164,7 +164,7 @@ RSpec.describe "Works", type: :request do
     end
     context "本人の場合" do
       before do
-        sign_in_as user
+        sign_in user
         patch '/works/' + work.id.to_s, params: new_work_parms
       end
       it "正常にレスポンスが返ってくる" do
@@ -199,7 +199,7 @@ RSpec.describe "Works", type: :request do
 
     context "本人ではない場合" do
       before do
-        sign_in_as user2
+        sign_in user2
         delete work_path work
       end
       it "正常にレスポンスが返ってくる" do
@@ -217,7 +217,7 @@ RSpec.describe "Works", type: :request do
 
     context "本人の場合" do
       before do
-        sign_in_as user
+        sign_in user
         delete work_path work
       end
       it "正常にレスポンスが返ってくる" do

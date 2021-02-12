@@ -25,13 +25,6 @@ RSpec.feature "user_profile", type: :system do
         expect(page).to have_content 'よろしくおねがいします'
       end
 
-      it 'パスワードは入力しなくても編集できる' do
-        fill_in 'user[password]', with: ''
-        fill_in 'user[password_confirmation]', with: ''
-        find('#editing').click
-        expect(page).to have_content 'プロフィールを編集しました'
-      end
-
       it '紹介文は150文字以内でなければいけない' do
         fill_in 'user[introduction_text]', with: 'a' * 151
         find('#editing').click
@@ -53,7 +46,7 @@ RSpec.feature "user_profile", type: :system do
     context 'ログインしていない場合' do
       it 'ログインページにリダイレクトされる' do
         visit edit_user_path kazuya
-        expect(current_path).to eq login_path
+        expect(current_path).to eq new_user_session_path
       end
     end
   end

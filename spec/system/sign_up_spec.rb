@@ -3,17 +3,17 @@ require 'rails_helper'
 RSpec.feature "sign_up", type: :system do
 
   background do
-    visit new_user_path
-    fill_in 'user[name]',                 with: 'kazuya'
-    fill_in 'user[email]',                with: 'kazuya@test.com'
-    fill_in 'user[password]',             with: 'password'
-    fill_in 'user[password_confirmation]', with: 'password'
+    visit new_user_registration_path
+    fill_in '名前',                 with: 'kazuya'
+    fill_in 'メールアドレス',                with: 'kazuya@test.com'
+    fill_in 'パスワード',             with: 'password'
+    fill_in 'パスワード（確認用）', with: 'password'
   end
 
   describe '入力が正しい場合' do
     it '登録に成功する' do
       find('#signup').click
-      expect(page).to have_content "登録が完了しました"
+      expect(page).to have_content "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.feature "sign_up", type: :system do
 
     context '名前が空欄の場合' do
       it '登録失敗する' do
-        fill_in 'user[name]', with: ''
+        fill_in '名前', with: ''
         find('#signup').click
         expect(page).to have_content '名前を入力してください'
       end
@@ -29,7 +29,7 @@ RSpec.feature "sign_up", type: :system do
 
     context '名前が文字数オーバー場合' do
       it '登録失敗する' do
-        fill_in 'user[name]', with: 'a' * 51
+        fill_in '名前', with: 'a' * 51
         find('#signup').click
         expect(page).to have_content '名前は50文字以内で入力してください' 
       end
@@ -37,7 +37,7 @@ RSpec.feature "sign_up", type: :system do
 
     context 'メールアドレスが空欄の場合' do
       it '登録失敗する' do
-        fill_in 'user[email]', with: ''
+        fill_in 'メールアドレス', with: ''
         find('#signup').click
         expect(page).to have_content 'メールアドレスを入力してください'
       end
@@ -45,7 +45,7 @@ RSpec.feature "sign_up", type: :system do
 
     context 'メールアドレスが文字数オーバーの場合' do
       it '登録失敗する' do
-        fill_in 'user[email]', with: 'a' * 256 + '@test.com'
+        fill_in 'メールアドレス', with: 'a' * 256 + '@test.com'
         find('#signup').click
         expect(page).to have_content 'メールアドレスは255文字以内で入力してください'
       end
@@ -53,7 +53,7 @@ RSpec.feature "sign_up", type: :system do
 
     context 'メールアドレスのフォーマットが不正な場合' do
       it '登録失敗する' do
-        fill_in 'user[email]', with: 'abc_@__@/.com'
+        fill_in 'メールアドレス', with: 'abc_@__@/.com'
         find('#signup').click
         expect(page).to have_content 'メールアドレスは不正な値です'
       end
@@ -70,7 +70,7 @@ RSpec.feature "sign_up", type: :system do
 
     context 'パスワードが空欄の場合' do
       it '登録失敗' do
-        fill_in 'user[password]', with: ''
+        fill_in 'パスワード', with: ''
         find('#signup').click
         expect(page).to have_content 'パスワードを入力してください'
       end
@@ -78,7 +78,7 @@ RSpec.feature "sign_up", type: :system do
 
     context 'パスワードの文字数が少ない場合' do
       it '登録失敗' do
-        fill_in 'user[password]', with: 'a' * 5
+        fill_in 'パスワード', with: 'a' * 5
         find('#signup').click
         expect(page).to have_content 'パスワードは6文字以上で入力してください'
       end
@@ -86,9 +86,9 @@ RSpec.feature "sign_up", type: :system do
 
     context 'パスワードと確認の値が一致しない場合' do
       it '登録失敗' do
-        fill_in 'user[password_confirmation]', with: 'notpassword'
+        fill_in 'パスワード（確認用）', with: 'notpassword'
         find('#signup').click
-        expect(page).to have_content 'パスワード確認とパスワードの入力が一致しません'
+        expect(page).to have_content 'パスワード（確認用）とパスワードの入力が一致しません'
       end
     end
   end

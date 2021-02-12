@@ -3,7 +3,7 @@
 <div class="Form">
   <%= form_with(model: @user, local: true) do |f| %>
     
-    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'shared/error_messages' %>
 
     <div class="Form-Item">
       <%= f.label :名前, class:"Form-Item-Label" %>
@@ -32,16 +32,6 @@
     <div class="field">
       <%= f.label :ボイスサンプル %>
       <%= f.file_field :voice_s %>
-    </div>
-
-    <div class="Form-Item">  
-      <%= f.label :パスワード, class:"Form-Item-Label" %>
-      <%= f.password_field :password, class:"Form-Item-Input" %>
-    </div> 
-
-    <div class="Form-Item">
-      <%= f.label :パスワード確認, class:"Form-Item-Label" %>
-      <%= f.password_field :password_confirmation, class:"Form-Item-Input" %>
     </div>
 
     <%= f.submit "編集する", class:"Form-Btn", id:"editing" %>

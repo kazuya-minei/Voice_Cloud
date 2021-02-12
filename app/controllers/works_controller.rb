@@ -11,7 +11,7 @@ class WorksController < ApplicationController
   end
 
   def new
-    @work = current_user.works.build if logged_in?
+    @work = current_user.works.build if user_signed_in?
   end
 
   def create

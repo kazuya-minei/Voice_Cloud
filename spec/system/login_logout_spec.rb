@@ -2,12 +2,12 @@
 
 # RSpec.feature 'login', type: :system do
   
-#   given! (:user) { create( :user, name: 'minei', email: 'minei@test.com' ) }
+#   given! (:user) { create( :user, name: 'minei', メールアドレス: 'minei@test.com' ) }
 
 #   background do
 #     visit '/login'
-#     fill_in 'session[email]', with: 'minei@test.com'
-#     fill_in 'session[password]', with: 'password'
+#     fill_in 'email', with: 'minei@test.com'
+#     fill_in 'password', with: 'password'
 #   end
   
 #   feature '入力が正しい場合' do
@@ -27,8 +27,8 @@ RSpec.feature "login_logout", type: :system do
 
   background do
     visit login_path
-    fill_in 'session[email]', with: 'minei@test.com'
-    fill_in 'session[password]', with: 'password'
+    fill_in 'メールアドレス', with: 'minei@test.com'
+    fill_in 'パスワード', with: 'password'
   end
 
   scenario '正常にログインできる' do
@@ -37,15 +37,15 @@ RSpec.feature "login_logout", type: :system do
   end
 
   scenario 'メールアドレスが不正だとログインできない' do
-    fill_in 'session[email]', with: 'not-minei@test.com'
+    fill_in 'メールアドレス', with: 'not-minei@test.com'
     find('#login').click
-    expect(page).to have_content 'メールアドレスかパスワードが違います'
+    expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
   end
 
   scenario 'パスワードが不正だとログインできない' do
-    fill_in 'session[password]', with: 'notpassword'
+    fill_in 'パスワード', with: 'notpassword'
     find('#login').click
-    expect(page).to have_content 'メールアドレスかパスワードが違います'
+    expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
   end
 
   scenario 'ログアウトができる' do

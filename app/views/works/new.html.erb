@@ -3,7 +3,7 @@
 <div class="Form">
   <%= form_with(model: @work, local: true) do |f| %>
 
-    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'shared/error_messages' %>
     
     <div class="Form-Item">
       <%= f.label :タイトル, class:"Form-Item-Label" %>

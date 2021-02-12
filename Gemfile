@@ -27,6 +27,8 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'rails-controller-testing'
 
+gem 'devise'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.1'
 # Use Puma as the app server

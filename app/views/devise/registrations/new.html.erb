@@ -1,0 +1,30 @@
+<h1 class="title">新規登録</h1>
+
+<div class="Form">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="Form-Item">
+      <%= f.label :name, class:"Form-Item-Label" %>
+      <%= f.text_field :name, class:"Form-Item-Input" %>
+    </div>
+  
+    <div class="Form-Item">
+      <%= f.label :email, class:"Form-Item-Label"%><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"Form-Item-Input" %>
+    </div>
+  
+    <div class="Form-Item">
+      <%= f.label :password, class:"Form-Item-Label" %>
+      <%= f.password_field :password, autocomplete: "new-password", class:"Form-Item-Input" %>
+    </div>
+  
+    <div class="Form-Item">
+      <%= f.label :password_confirmation, class:"Form-Item-Label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"Form-Item-Input" %>
+    </div>
+
+    <%= f.submit "登録", class:"Form-Btn", id: "signup" %>
+  <% end %>
+
+</div>

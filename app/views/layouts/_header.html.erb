@@ -4,7 +4,7 @@
   </h1>
   <nav class="pc-nav">
     <ul>
-      <% if logged_in? %>
+      <% if user_signed_in? %>
       
         <li><%= link_to "お題を投稿する", new_work_path,
                                           data: {"turbolinks" => false} %></li>
@@ -23,8 +23,8 @@
         <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
 
       <% else %>
-        <li><%= link_to "ログイン", login_path %></li>
-        <li><%= link_to "新規登録", signup_path %></li>
+        <li><%= link_to "ログイン", new_user_session_path %></li><!--login_path-->
+        <li><%= link_to "新規登録", new_user_registration_path %></li>  <!--signup_path-->
       <% end %>
     </ul>
   </nav>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe "Users" do
 
   let! (:user)  { create(:user) }
   let! (:user2) { create(:user) }
@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :request do
 
   describe "#new" do
     it "正常にレスポンスが返ってくる" do
-      get new_user_path
+      get new_user_registration_path
       expect(response).to have_http_status(200)
     end
   end
@@ -32,32 +32,32 @@ RSpec.describe "Users", type: :request do
   describe "POST #create" do
     context "登録成功" do
       it "正常にレスポンスが返ってくる" do
-        post users_path, params: {user: user_params }
+        post user_registration_path, params: {user: user_params }
         expect(response).to have_http_status(302)
       end
       it "登録成功でユーザーが一人増える" do
         expect do
-          post users_path, params: {user: user_params }
+          post user_registration_path, params: {user: user_params }
         end.to change(User, :count).by(1)
       end
       it "リダイレクトされる" do
-        post users_path, params: {user: user_params }
+        post user_registration_path, params: {user: user_params }
         expect(response).to redirect_to root_path
       end
     end
 
     context "登録失敗" do
       it "正常にレスポンスが返ってくる"  do
-        post users_path, params: {user: invalid_user_params}
+        post user_registration_path, params: {user: invalid_user_params}
         expect(response).to have_http_status(200)
       end
       it "ユーザー数は増えない" do
         expect do
-          post users_path, params: {user: invalid_user_params}
+          post user_registration_path, params: {user: invalid_user_params}
         end.to change(User, :count).by(0)        
       end
       it "フォームがそのまま表示される" do
-        post users_path, params: {user: invalid_user_params}
+        post user_registration_path, params: {user: invalid_user_params}
         expect(response).to render_template(:new)
       end
     end
@@ -66,8 +66,8 @@ RSpec.describe "Users", type: :request do
   describe "#edit" do
     context "本人の場合" do
       before do
-        sign_in_as user
-        get edit_user_url user
+        sign_in user
+        get edit_user_path(user)
       end
 
       it "正常にレスポンスが返ってくる"  do
@@ -77,8 +77,8 @@ RSpec.describe "Users", type: :request do
 
     context "本人ではない場合" do
       before do
-        sign_in_as user2
-        get edit_user_path user
+        sign_in user2
+        get edit_user_path(user)
       end
 
       it "正常にレスポンスが返ってくる" do
@@ -88,13 +88,13 @@ RSpec.describe "Users", type: :request do
 
     context "ログインしてない場合" do
       before do
-        get edit_user_path user
+        get edit_user_path(user)
       end
       it "正常にレスポンスが返ってくる"  do
         expect(response).to have_http_status(302)
       end
       it "ログインフォームへリダイレクトする" do
-        expect(response).to redirect_to login_path
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -105,7 +105,7 @@ RSpec.describe "Users", type: :request do
   describe "DELETE #destroy" do
     context "権限がない場合" do
       before do
-        sign_in_as user
+        sign_in user
         delete user_path user2
       end
 
@@ -122,7 +122,7 @@ RSpec.describe "Users", type: :request do
 
     context "管理者の場合" do
       before do
-        sign_in_as admin
+        sign_in admin
       end
 
       it "正常にレスポンスが返ってくる" do
