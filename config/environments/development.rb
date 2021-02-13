@@ -82,9 +82,12 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => 'smtp.gmail.com',
     :port => 587,
-    :user_name => 'voicecloud1158@gmail.com',
-    :password => 'oihiydxqyuomagyh',
+    :user_name => 'ACTION_MAILER_ADDRESS',
+    :password => 'ACTION_MEILER_PASSWORD',
     :authentication => :plain,
     :enable_starttls_auto => true
   }
 end
+
+ACTION_MAILER_ADDRESS 
+ACTION_MEILER_PASSWORD
