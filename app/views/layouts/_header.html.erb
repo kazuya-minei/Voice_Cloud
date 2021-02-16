@@ -1,3 +1,14 @@
+<% if flash[:notice] %>
+  <div class="info messages2">
+    <p class="notice message"><%= notice %></p>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="danger messages2">
+    <p class="alert message"><%= alert %></p>
+  </div>
+<% end %>
+
 <header>
   <h1 class="copy">  
     <%= link_to "Voice Cloud", root_path %>

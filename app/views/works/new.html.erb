@@ -1,10 +1,10 @@
 <h1 class="title">お題内容を記入</h1>
 
+<%= render 'shared/error_messages' %>
 <div class="Form">
   <%= form_with(model: @work, local: true) do |f| %>
 
-    <%= render 'shared/error_messages' %>
-    
+
     <div class="Form-Item">
       <%= f.label :タイトル, class:"Form-Item-Label" %>
       <%= f.text_field :title, class:"Form-Item-Input" %>

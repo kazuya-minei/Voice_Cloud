@@ -18,15 +18,14 @@ RSpec.feature "work", type: :system do
     context '入力が正しい場合' do
       background do
         login kazuya # フィーチャースペックなので
-        # sign_in_as user
         visit new_work_path
         fill_in 'work[title]',   with: 'new_work_title'
-        fill_in 'work[content]', with: 'new_work_contentr'
+        fill_in 'work[content]', with: 'a' * 1000
       end
 
       it '投稿に成功する'  do
         find('#submission').click
-        expect(page).to have_content '募集を開始しました'
+        expect(page).to have_content 'お題を投稿しました'
       end
     end
 
@@ -55,10 +54,10 @@ RSpec.feature "work", type: :system do
         expect(page).to have_content 'お題詳細を入力してください' 
       end
 
-      it '以来詳細は2001文字以上は投稿失敗' do
-        fill_in 'work[content]', with: 'a' * 2001
+      it '以来詳細は1001文字以上は投稿失敗' do
+        fill_in 'work[content]', with: 'a' * 1001
         find('#submission').click
-        expect(page).to have_content 'お題詳細は2000文字以内で入力してください'
+        expect(page).to have_content 'お題詳細は1000文字以内で入力してください'
       end
     end
   end

@@ -1,9 +1,9 @@
 <h1 class="title">プロフィール編集</h1>
 
+<%= render 'shared/error_messages' %>
 <div class="Form">
   <%= form_with(model: @user, local: true) do |f| %>
-    
-    <%= render 'shared/error_messages' %>
+
 
     <div class="Form-Item">
       <%= f.label :名前, class:"Form-Item-Label" %>

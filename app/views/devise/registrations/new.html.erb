@@ -1,8 +1,8 @@
 <h1 class="title">新規登録</h1>
 
+<%= render "devise/shared/error_messages", resource: resource %>
 <div class="Form">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="Form-Item">
       <%= f.label :name, class:"Form-Item-Label" %>

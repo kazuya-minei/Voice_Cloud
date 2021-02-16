@@ -17,9 +17,11 @@ class WorksController < ApplicationController
   def create
     @work = current_user.works.build(work_params)
     if @work.save
-      flash[:success] = "募集を開始しました"
+      flash[:notice] = "お題を投稿しました"
       redirect_to works_path
     else
+      flash[:work] = @work
+      flash.now[:error_messages] = @work.errors.full_messages
       render 'new'
     end
   end
@@ -31,16 +33,18 @@ class WorksController < ApplicationController
   def update
     @work = Work.find(params[:id])
     if @work.update(work_params)
-      flash[:success] = "募集内容を編集しました"
+      flash[:notice] = "募集内容を編集しました"
       redirect_to @work
     else
+      flash[:work] = @work
+      flash.now[:error_messages] = @work.errors.full_messages
       render 'edit'
     end
   end
 
   def destroy
     @work.destroy
-    flash[:success] = "お題を削除しました"
+    flash[:notice] = "お題を削除しました"
     redirect_to works_url
   end
 

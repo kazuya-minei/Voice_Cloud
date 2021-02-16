@@ -19,9 +19,11 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:success] = "プロフィールを編集しました"
       redirect_to @user
+      flash[:notice] = "#{@user.name}さんの情報を更新しました"
     else
+      flash[:user] = @user
+      flash.now[:error_messages] = @user.errors.full_messages
       render 'edit'
     end
   end

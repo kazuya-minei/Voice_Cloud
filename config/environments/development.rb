@@ -88,6 +88,3 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 end
-
-ACTION_MAILER_ADDRESS 
-ACTION_MEILER_PASSWORD

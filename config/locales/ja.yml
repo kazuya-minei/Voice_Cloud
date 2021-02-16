@@ -26,6 +26,7 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        introduction_text: 紹介文
       work:
         title: タイトル
         content: お題詳細

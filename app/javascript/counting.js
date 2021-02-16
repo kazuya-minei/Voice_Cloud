@@ -32,9 +32,9 @@ $(function (){
 
   var count = $(".work-text").text().replace(/\n/g, "改行").length;
 
-  var now_count = 2000 - count;
+  var now_count = 1000 - count;
 
-  if (count > 2000) {
+  if (count > 1000) {
     $(".work-text-count").css("color","red");
   }
   $(".work-text-count").text( "残り" + now_count + "文字");
@@ -42,9 +42,9 @@ $(function (){
   $(".work-text").on("keyup", function() {
 
     var count = $(this).val().replace(/\n/g, "改行").length;
-    var now_count = 2000 - count;
+    var now_count = 1000 - count;
 
-    if (count > 2000) {
+    if (count > 1000) {
       $(".work-text-count").css("color","red");
     } else {
       $(".work-text-count").css("color","black");

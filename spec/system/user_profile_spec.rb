@@ -20,7 +20,7 @@ RSpec.feature "user_profile", type: :system do
         fill_in 'user[name]', with: 'kazuya minei'
         fill_in 'user[introduction_text]', with: 'よろしくおねがいします'
         find('#editing').click
-        expect(page).to have_content 'プロフィールを編集しました'
+        expect(page).to have_content 'kazuya mineiさんの情報を更新しました'
         expect(page).to have_content 'kazuya minei'
         expect(page).to have_content 'よろしくおねがいします'
       end
