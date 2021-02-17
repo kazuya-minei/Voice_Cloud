@@ -1,0 +1,16 @@
+<h1 class="title">投稿ボイス</h1>
+
+<%= will_paginate %>
+
+<div class="items">
+<% @voices.each do |voice| %>
+  <div class="one-item">
+    <%= image_tag voice.user.avatar.url, size: 150 %>
+    <h2><%= voice.work.title %></h2>
+    <%= voice.user.name %>
+    <%= audio_tag voice.voice_data.url %>
+  </div>
+<% end %>
+</div>
+
+<%= will_paginate %>

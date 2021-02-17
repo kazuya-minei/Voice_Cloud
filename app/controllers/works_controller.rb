@@ -8,6 +8,8 @@ class WorksController < ApplicationController
 
   def show
     @work = Work.find(params[:id])
+    @voices = @work.voices
+    @voice = current_user.voices.new
   end
 
   def new

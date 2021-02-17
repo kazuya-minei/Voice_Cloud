@@ -1,0 +1,6 @@
+<% @user.voices.each do |voice| %>
+  <div class="voices">
+    <hi class="voice-title"><%= voice.work.title %></h1>
+    <%= audio_tag voice.voice_data.url %>
+  </div>
+<% end %>

@@ -17,7 +17,7 @@ RSpec.feature "work", type: :system do
 
     context '入力が正しい場合' do
       background do
-        login kazuya # フィーチャースペックなので
+        login kazuya 
         visit new_work_path
         fill_in 'work[title]',   with: 'new_work_title'
         fill_in 'work[content]', with: 'a' * 1000
