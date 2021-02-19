@@ -1,0 +1,25 @@
+<%= render 'shared/error_messages' %>
+<h1 class="title"><%= @voice.work.title %></h1>
+
+<%= audio_tag @voice.voice_data.url %>
+
+<div class="comment-form">
+  <%= form_with(model: [@voice, @comment], local: true) do |f| %>
+    <%= f.hidden_field :voice_id, value: @voice.id %>
+    <div class="field">
+      <%= f.label :コメントする %>
+      <%= f.text_field :comment %>
+    </div>
+    <%= f.submit "コメント", class:"Form-Btn", id:"submission" %>
+  <% end %>
+</div>
+ 
+<div class="comment">
+  <% @comments.each do |comment| %>
+    <%= link_to "#{comment.user.name}", user_path(comment.user), data: {"turbolinks" => false}  %>
+    <%= comment.comment %>
+    <% if current_user == comment.user %>
+      <%= link_to "削除", comment, method: :delete, data: { confirm: "コメントを削除しますか?"} %>
+    <% end %> 
+  <% end %>
+</div>

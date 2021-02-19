@@ -26,7 +26,13 @@ Rails.application.routes.draw do
   resources :works do
     resources :voices, only: [:create]
   end
-  resources :voices, only: [:index, :destroy]
+  resources :voices, only: [:index, :show, :destroy]
+
+  resources :voices do
+    resources :comments, only: [:create]
+  end
+  resources :comments, only: [:destroy]
+  
 
   resources :relationships, only: [:create, :destroy]
 end

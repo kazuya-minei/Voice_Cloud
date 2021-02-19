@@ -30,6 +30,8 @@ ja:
       work:
         title: タイトル
         content: お題詳細
+      comment: 
+        comment: コメント
     models:
       user: ユーザー
   devise:

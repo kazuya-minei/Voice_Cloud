@@ -6,8 +6,8 @@
 <% @voices.each do |voice| %>
   <div class="one-item">
     <%= image_tag voice.user.avatar.url, size: 150 %>
-    <h2><%= voice.work.title %></h2>
-    <%= voice.user.name %>
+    <h2><%= link_to "#{voice.work.title}", work_path(voice.work) %></h2>
+    <%= link_to "#{voice.user.name}", user_path(voice.user) %>
     <%= audio_tag voice.voice_data.url %>
   </div>
 <% end %>

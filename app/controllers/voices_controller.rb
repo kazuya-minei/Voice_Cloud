@@ -7,6 +7,12 @@ class VoicesController < ApplicationController
     @voices = Voice.paginate(page: params[:page])
   end
 
+  def show
+    @voice = Voice.find(params[:id])
+    @comments = @voice.comments
+    @comment = current_user.comments.new
+  end
+
   def create
     @voice = current_user.voices.new(voice_params)
     if @voice.save
