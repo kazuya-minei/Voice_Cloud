@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_user, only: %i(show edit update destroy following followers)
+  before_action :set_user, only: %i(show edit update destroy following followers worklikes voicelikes)
   before_action :correct_user, only: %i(edit update)
 
   def index
@@ -49,8 +49,11 @@ class UsersController < ApplicationController
   end
 
   def worklikes
-    @user = current_user
     @worklikes = @user.workLikes
+  end
+
+  def voicelikes 
+    @voicelikes = @user.voiceLikes
   end
 
   private

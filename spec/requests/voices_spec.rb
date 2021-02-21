@@ -9,28 +9,9 @@ RSpec.describe "Voices", type: :request do
   let  (:voice_params) { attributes_for(:voice) }
 
   describe "#index" do 
-    context "ログインしていない時" do
-
-      before { get voices_path }
-
-      it "正常にレスポンスが返ってくる" do
-        expect(response).to have_http_status(302)
-      end 
-      it "ログインページにリダイレクトされる" do
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
-    context "ログイン済みの時" do
-
-      before do
-        sign_in user
-        get voices_path
-      end
-
-      it "正常にレスポンスが返ってくる" do
-        expect(response).to have_http_status(200)
-      end
+    it "正常にレスポンスが返ってくる" do
+      get voices_path
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -62,7 +43,7 @@ RSpec.describe "Voices", type: :request do
         expect(response).to have_http_status(302)
       end
       it "ログインページにリダイレクトされる" do
-        expect(response).to redirect_to new_user_session_path
+        expect(response).to redirect_to login_path
       end
       it "Voiceデータの数は変わらない" do
         expect do

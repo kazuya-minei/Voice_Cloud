@@ -1,0 +1,22 @@
+<% @user.voices.each do |voice| %>
+  <div class="voices">
+    <hi class="voice-title"><%= voice.work.title %></h1>
+    <%= audio_tag voice.voice_data.url %>
+    <%= link_to "コメント", voice_path(voice), data: {"turbolinks" => false} %>
+      <% if current_user %>
+        <% if current_user.voiceliked_by?(voice.id) %>
+          <td>
+            <%= link_to 'いいね済み', destroy_voicelike_path(voice), 
+                                      method: :DELETE %>
+            <%= voice.voice_likes.count %>
+          </td>
+        <% else %>
+          <td>
+            <%= link_to 'いいね', create_voicelike_path(voice), 
+                                  method: :POST %>
+            <%= voice.voice_likes.count %>
+          </td>
+        <% end %>
+      <% end %>
+  </div>
+<% end %>

@@ -13,7 +13,8 @@
     <%= render 'shared/stats' %>
     <%= render 'follow_form' if user_signed_in? %>
     <% if current_user %>
-      <%= link_to "お気に入りしたお題", worklikes_user_path(@user) %>
+      <%= link_to "お気に入りしたお題", worklikes_user_path %>
+      <%= link_to "いいねしたボイス", voicelikes_user_path %>
     <% end %>
   </div>
 
@@ -39,10 +40,10 @@
     </div>
   <% end %>
 
-  <!--<% if @user.voices.any? %>
+  <% if @user.voices.any? %>
     <div>
       <h1 class="item-name">投稿したボイス</h1>
-      <%= render 'voices/voices' %>
+      <%= render 'voices/user_voices' %>
     </div>
-  <% end %>-->
+  <% end %>
 </div>

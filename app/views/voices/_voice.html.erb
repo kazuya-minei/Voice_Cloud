@@ -1,0 +1,19 @@
+<%= image_tag voice.user.avatar.url, size: 150 %>
+<h2><%= link_to "#{voice.work.title}", work_path(voice.work) %></h2>
+<%= link_to "#{voice.user.name}", user_path(voice.user) %>
+<%= audio_tag voice.voice_data.url %>
+<% if current_user %>
+  <% if current_user.voiceliked_by?(voice.id) %>
+    <td>
+      <%= link_to 'いいね済み', destroy_voicelike_path(voice), 
+                                method: :DELETE %>
+      <%= voice.voice_likes.count %>
+    </td>
+  <% else %>
+    <td>
+      <%= link_to 'いいね', create_voicelike_path(voice), 
+                            method: :POST %>
+      <%= voice.voice_likes.count %>
+    </td>
+  <% end %>
+<% end %>

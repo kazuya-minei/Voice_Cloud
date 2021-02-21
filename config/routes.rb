@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers, :worklikes
+      get :following, :followers, :worklikes, :voicelikes
     end
   end
 
@@ -37,4 +37,7 @@ Rails.application.routes.draw do
 
   post 'worklike/:id' => 'work_likes#create', as: 'create_worklike'
   delete 'worklike/:id' => 'work_likes#destroy', as: 'destroy_worklike'
+
+  post 'voicelike/:id' => 'voice_likes#create', as: 'create_voicelike'
+  delete 'voicelike/:id' => 'voice_likes#destroy', as: 'destroy_voicelike'
 end

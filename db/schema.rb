@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_030534) do
+ActiveRecord::Schema.define(version: 2021_02_21_052231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2021_02_20_030534) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "voice_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "voice_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_voice_likes_on_user_id"
+    t.index ["voice_id"], name: "index_voice_likes_on_voice_id"
+  end
+
   create_table "voices", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "work_id", null: false
@@ -91,6 +100,8 @@ ActiveRecord::Schema.define(version: 2021_02_20_030534) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "voices"
+  add_foreign_key "voice_likes", "users"
+  add_foreign_key "voice_likes", "voices"
   add_foreign_key "voices", "users"
   add_foreign_key "voices", "works"
   add_foreign_key "work_likes", "users"

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :voices, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :workLikes, dependent: :destroy
+  has_many :voiceLikes, dependent: :destroy
   has_many :active_relationships,  class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                     dependent: :destroy
@@ -73,9 +74,13 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-  def liked_by?(work_id)
+  def workliked_by?(work_id)
     workLikes.where(work_id: work_id).exists?
   end  
+
+  def voiceliked_by?(voice_id)
+    voiceLikes.where(voice_id: voice_id).exists?
+  end
   
   mount_uploader :avatar, AvatarUploader
   mount_uploader :voice_s, VoiceSampleUploader

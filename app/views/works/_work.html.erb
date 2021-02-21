@@ -1,7 +1,9 @@
 <h2 class="work-title"><%= link_to work.title, work, data: {"turbolinks" => false}  %></h2>
 <p class="work-content"><%= work.content %></p>
+
+
 <% if current_user %>
-  <% if current_user.liked_by?(work.id) %>
+  <% if current_user.workliked_by?(work.id) %>
     <td>
       <%= link_to 'お気に入り済み', destroy_worklike_path(work), method: :DELETE, remote: true  %>
       <%= work.workLikes.count %>

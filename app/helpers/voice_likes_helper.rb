@@ -1,0 +1,2 @@
+module VoiceLikesHelper
+end

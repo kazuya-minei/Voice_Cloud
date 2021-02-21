@@ -24,11 +24,30 @@
 
 <div class="voice">
   <% @voices.each do |voice| %>
-    <%= link_to "#{voice.user.name}", user_path(voice.user), data: {"turbolinks" => false}  %>
-    <%= audio_tag voice.voice_data.url %>
-    <%= link_to "コメント", voice_path(voice), data: {"turbolinks" => false} %>
-    <% if current_user == voice.user %>
-      <%= link_to "ボイスを削除する", voice, method: :delete, data: { confirm: "ボイスを削除しますか?"} %>
-    <% end %>
+    <div class="one-item", id="voice_<%= voice.id %>">
+      <%= image_tag voice.user.avatar.url, size: 150 %>
+      <%= link_to voice.user.name, user_path(voice.user), data: {"turbolinks" => false}  %>
+      <%= audio_tag voice.voice_data.url %>
+      <%= link_to "コメント", voice_path(voice), data: {"turbolinks" => false} %>
+      <% if current_user %>
+        <% if current_user.voiceliked_by?(voice.id) %>
+          <td>
+            <%= link_to 'いいね済み', destroy_voicelike_path(voice), 
+                                      method: :DELETE %>
+            <%= voice.voice_likes.count %>
+          </td>
+        <% else %>
+          <td>
+            <%= link_to 'いいね', create_voicelike_path(voice), 
+                                  method: :POST %>
+            <%= voice.voice_likes.count %>
+          </td>
+        <% end %>
+      <% end %>
+      <% if current_user == voice.user %>
+        <%= link_to "ボイスを削除する", voice, method: :delete, data: { confirm: "ボイスを削除しますか?"} %>
+      <% end %>
+    </div>
   <% end %>
 </div>
+
