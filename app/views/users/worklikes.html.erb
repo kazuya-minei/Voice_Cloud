@@ -1,0 +1,23 @@
+<h1 class="title">お気に入りしたお題</h1>
+
+
+
+<% @worklikes.each do |likes| %>
+  <% work = Work.find_by(id: likes.work_id) %>
+  <div class="one-item", id="work_<%= work.id %>">
+    <h2 class="work-title"><%= link_to work.title, work, data: {"turbolinks" => false}  %></h2>
+    <p class="work-content"><%= work.content %></p>
+    <% if current_user.liked_by?(work.id) %>
+      <td>
+        <%= link_to 'お気に入り済み', destroy_worklike_path(work), method: :DELETE, remote: true %>
+        <%= work.workLikes.count %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to 'お気に入り', create_worklike_path(work), method: :POST, remote: true %>
+        <%= work.workLikes.count %>
+      </td>
+    <% end %>
+  </div>
+<% end %>
+

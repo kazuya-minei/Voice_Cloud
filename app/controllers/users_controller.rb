@@ -48,6 +48,11 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
   end
 
+  def worklikes
+    @user = current_user
+    @worklikes = @user.workLikes
+  end
+
   private
 
     def user_params

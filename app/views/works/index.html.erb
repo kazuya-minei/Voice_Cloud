@@ -3,10 +3,9 @@
 <%= will_paginate %>
 
   <div class="items">
-    <% @works.each do |work| %>
-      <div class="one-item">
-      <h2 class="work-title"><%= link_to work.title, work, data: {"turbolinks" => false}  %></h2>
-      <p class="work-content"><%= work.content %></p>
+    <% @works.each do |work| %> 
+      <div class="one-item", id="work_<%= work.id %>">
+        <%= render 'work', work: work %>
       </div>
     <% end %>
   </div>

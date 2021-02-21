@@ -1,0 +1,2 @@
+module WorkLikesHelper
+end

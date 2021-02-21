@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_040548) do
+ActiveRecord::Schema.define(version: 2021_02_20_030534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,15 @@ ActiveRecord::Schema.define(version: 2021_02_19_040548) do
     t.index ["work_id"], name: "index_voices_on_work_id"
   end
 
+  create_table "work_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "work_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_work_likes_on_user_id"
+    t.index ["work_id"], name: "index_work_likes_on_work_id"
+  end
+
   create_table "works", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -84,5 +93,7 @@ ActiveRecord::Schema.define(version: 2021_02_19_040548) do
   add_foreign_key "comments", "voices"
   add_foreign_key "voices", "users"
   add_foreign_key "voices", "works"
+  add_foreign_key "work_likes", "users"
+  add_foreign_key "work_likes", "works"
   add_foreign_key "works", "users"
 end
