@@ -1,25 +1,65 @@
 <%= render 'shared/error_messages' %>
-<h1 class="title"><%= @voice.work.title %></h1>
+<div class="<%= item %>">
+  <h1 class="text-add-text text-xl text-center font-semibold lg:text-2xl border-b-2 border-add-text border-opacity-25 mb-4"><%= @voice.work.title %></h1>
 
-<%= audio_tag @voice.voice_data.url %>
+  <%= image_tag @voice.user.avatar.url, class:"w-btnPx m-auto" %>
+  <div class="text-center my-2">
+    <%= link_to @voice.user.name, user_path(@voice.user), data: {"turbolinks" => false} %>
+  </div>
+
+  <%= audio_tag @voice.voice_data.url %>
+  <% if current_user %>
+    <div class="text-right mt-2">
+      <% if current_user.voiceliked_by?(@voice.id) %>
+        <td>
+          <%= link_to destroy_voicelike_path(@voice), class:"pl-4",  method: :DELETE do %>
+            <i class="fas fa-heart"></i>
+          <% end %> 
+          <%= @voice.voice_likes.count %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to create_voicelike_path(@voice), class:"pl-4", method: :POST do %>
+            <i class="far fa-heart"></i>
+          <% end %>
+          <%= @voice.voice_likes.count %>
+        </td>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <div class="comment-form">
   <%= form_with(model: [@voice, @comment], local: true) do |f| %>
     <%= f.hidden_field :voice_id, value: @voice.id %>
-    <div class="field">
-      <%= f.label :コメントする %>
-      <%= f.text_field :comment %>
+    <div class="pb-4 text-center">
+      <%= f.label :コメントする, class:subTitle %>
+      <%= f.text_field :comment, class:formInput %>
     </div>
-    <%= f.submit "コメント", class:"Form-Btn", id:"submission" %>
+    <%= f.submit "コメント", class:submit, id:"submission" %>
   <% end %>
 </div>
  
-<div class="comment">
+<div class="mt-8">
   <% @comments.each do |comment| %>
-    <%= link_to "#{comment.user.name}", user_path(comment.user), data: {"turbolinks" => false}  %>
-    <%= comment.comment %>
-    <% if current_user == comment.user %>
-      <%= link_to "削除", comment, method: :delete, data: { confirm: "コメントを削除しますか?"} %>
-    <% end %> 
+    <div class="<%= item %> flex">
+      <div class="text-center w-btnPx">
+        <%= image_tag comment.user.avatar.url%>
+  
+        <%= link_to comment.user.name, user_path(comment.user), data: {"turbolinks" => false}  %>
+      </div>
+
+      <div class="flex flex-col w-full"> 
+        <div class="ml-2">
+          <%= comment.comment %>
+        </div>
+        
+        <% if current_user == comment.user %>
+          <div class="w-full text-right mt-auto">
+            <%= link_to "削除", comment, method: :delete, data: { confirm: "コメントを削除しますか?"} %>
+          </div>
+        <% end %> 
+      </div>
+    </div>
   <% end %>
 </div>

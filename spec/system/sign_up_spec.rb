@@ -7,7 +7,7 @@ RSpec.feature "sign_up", type: :system do
     fill_in '名前',                 with: 'kazuya'
     fill_in 'メールアドレス',                with: 'kazuya@test.com'
     fill_in 'パスワード',             with: 'password'
-    fill_in 'パスワード（確認用）', with: 'password'
+    fill_in 'パスワード確認', with: 'password'
   end
 
   describe '入力が正しい場合' do
@@ -86,7 +86,7 @@ RSpec.feature "sign_up", type: :system do
 
     context 'パスワードと確認の値が一致しない場合' do
       it '登録失敗' do
-        fill_in 'パスワード（確認用）', with: 'notpassword'
+        fill_in 'パスワード確認', with: 'notpassword'
         find('#signup').click
         expect(page).to have_content 'パスワード（確認用）とパスワードの入力が一致しません'
       end

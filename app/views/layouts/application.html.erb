@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><% yield(:title) %>Voice Cloud</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/audiojs/1.0.1/audio.min.js" integrity="sha512-n1UxE3D0oAro7q72ZVxyGIUqB3DBt+cYVNujO4yFXm74LVPkzUUgPyP5UGEkDEDAMGLNkDo4BnIMrE/M8b5lCw==" crossorigin="anonymous"></script>
-    <script>
-    audiojs.events.ready(function() {
-      var as = audiojs.createAll();
-    });
-    </script>
-    
+    <%= render 'shared/head' %>    
   </head>
 
 
-  <body>
-    <%= render 'layouts/header' %>
-    <div class = "container">
-      <%= yield %>  
+  <body class="bg-add-bg">
+    <div id="app">
+      <%= render 'layouts/header' %>
     </div>
+    
+    <% if current_page?(root_path) %>
+      <%= yield %>  
+    <% else %>
+      <div class="<%= page %>">
+        <%= yield %>  
+      </div>
+    <% end %>
+      
     <%= render 'layouts/footer' %>
+
     <%= debug(params) if Rails.env.development? %>
+      
+    <script>
+      const app = new Vue({
+          el: "#app",
+          data: {
+            isOpen: false,
+          }
+      });
+    </script>
   </body>
 </html>

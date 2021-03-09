@@ -29,18 +29,18 @@ RSpec.feature "rekationship", type: :system do
       # kazumaをフォローしにいく
       visit user_path kazuma
       expect(page).to have_content 'kazuma'
-      expect(page).to have_content '0 フォロワー'
+      expect(page).to have_content '0フォロワー'
       expect do
         click_button 'フォローする'
-        expect(page).to have_content '1 フォロワー'
+        expect(page).to have_content '1フォロワー'
       end.to change(kazuya.following, :count).by(1) &
              change(kazuma.followers, :count).by(1)
 
       # 自分のマイページに移動し、kazumaが追加されているか確認
       visit user_path kazuya
       expect(page).to have_content 'kazuya'
-      expect(page).to have_content '1 フォロー'
-      click_link '1 フォロー'
+      expect(page).to have_content '1フォロー'
+      click_link '1フォロー'
       expect(current_path).to eq "/users/#{kazuya.id}/following"
       expect(page).to have_content 'kazuma'
 
@@ -48,14 +48,14 @@ RSpec.feature "rekationship", type: :system do
       click_link 'kazuma'
       expect do
         click_button 'フォロー中'
-        expect(page).to have_content '0 フォロワー'
+        expect(page).to have_content '0フォロワー'
       end.to change(kazuya.following, :count).by(-1) &
              change(kazuma.followers, :count).by(-1)
 
       # 自分のマイページに移動し、kazumaが削除されているか確認
       visit user_path kazuya
-      expect(page).to have_content '0 フォロー'
-      click_link '0 フォロー'
+      expect(page).to have_content '0フォロー'
+      click_link '0フォロー'
       expect(page).not_to have_content 'kazuma'
     end
 
@@ -67,14 +67,14 @@ RSpec.feature "rekationship", type: :system do
         end
 
         it "フォロワーがいない時「現在フォロワーはいません」と表示される" do
-          expect(page).to have_content '0 フォロワー'
-          click_link '0 フォロワー'
+          expect(page).to have_content '0フォロワー'
+          click_link '0フォロワー'
           expect(page).to have_content '現在フォロワーはいません'
         end
   
         it "誰もフォローしてない時「現在フォロー中のユーザーはいません」と表示される" do
-          expect(page).to have_content '0 フォロー'
-          click_link '0 フォロー'
+          expect(page).to have_content '0フォロー'
+          click_link '0フォロー'
           expect(page).to have_content '現在フォロー中のユーザーはいません'
         end
       end

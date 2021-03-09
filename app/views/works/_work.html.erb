@@ -1,17 +1,33 @@
-<h2 class="work-title"><%= link_to work.title, work, data: {"turbolinks" => false}  %></h2>
-<p class="work-content"><%= work.content %></p>
+<div class="<%= titleUnderLine %>">
+  <h2 class="<%= subTitle %>">
+    <%= link_to work.title, work, data: {"turbolinks" => false}  %>
+  </h2>
+</div>
+<p class="opacity-75 mt-2"><%= work.content %></p>
 
 
 <% if current_user %>
-  <% if current_user.workliked_by?(work.id) %>
-    <td>
-      <%= link_to 'お気に入り済み', destroy_worklike_path(work), method: :DELETE, remote: true  %>
-      <%= work.workLikes.count %>
-    </td>
-  <% else %>
-    <td>
-      <%= link_to 'お気に入り', create_worklike_path(work), method: :POST, remote: true  %>
-      <%= work.workLikes.count %>
-    </td>
-  <% end %>
+  <div class="flex mt-6">
+
+    <div class="mr-2 pr-2 border-r-2 border-add-text border-opacity-50">
+      <% if current_user.workliked_by?(work.id) %>
+        <%= link_to destroy_worklike_path(work), method: :DELETE, remote: true do %>
+          <p>お気に入り<i class="fas fa-star pr-2"></i><%= work.workLikes.count %></p>
+        <% end %>
+      <% else %>
+        <%= link_to create_worklike_path(work), method: :POST, remote: true do %>
+          <p>お気に入り<i class="far fa-star pr-2"></i><%= work.workLikes.count %></p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <p>投稿ボイス<i class="fas fa-microphone pr-2"></i><%= work.voices.count %></p>
+    </div>
+
+    <div class="text-sm opacity-75 ml-auto">
+      <%= link_to "…", work, data: {"turbolinks" => false} %>
+    </div>
+
+  </div>
 <% end %>

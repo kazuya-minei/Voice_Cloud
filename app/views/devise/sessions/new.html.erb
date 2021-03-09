@@ -1,30 +1,33 @@
-<h1 class="title">ログイン</h1>
 
-<div class="Form">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-    <div class="Form-Item">
-      <%= f.label :email, class:"Form-Item-Label" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"Form-Item-Input email" %>
+  <h1 class="<%= pageTitle %>">ログイン</h1>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+  
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+
+    <div class="<%=form%>">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", 
+          class:formInput, placeholder:"メールアドレス" %>
     </div>
   
-    <div class="Form-Item">
-      <%= f.label :password, class:"Form-Item-Label" %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class:"Form-Item-Input password" %>
+    <div class="<%=form%>">
+      <%= f.password_field :password, autocomplete: "current-password", 
+          class:formInput, placeholder:"パスワード" %>
     </div>
   
     <% if devise_mapping.rememberable? %>
-      <div class="checkbox">
-        <%= f.label :remember_me, class: "inline" %>
-        <%= f.check_box :remember_me %>
-        <span>ログインしたままにする</span>
+      <div class="<%=form%>">
+        <%= f.check_box :remember_me, class:"rounded-full" %>
+        <%= f.label :remember_me, class: "text-add-text" %>
       </div>
     <% end %>
   
-    <div class="actions">
-      <%= f.submit "ログイン", class:"Form-Btn login", id:"login" %>
+    <div class="<%= formBtn %>">
+      <%= f.submit "ログイン", class: submit, id:"login" %>
+    </div>
+     
+    <div class="text-center mt-4">
+      <%= link_to "登録がお済みでない方はこちら", new_user_registration_path, data: {"turbolinks" => false} %>
     </div>
   <% end %>
-</div>
-
-<%= render "devise/shared/links" %>

@@ -1,23 +1,13 @@
-<h1 class="title">List of Voice Actors</h1>
+<h1 class="<%= pageTitle %>">登録ユーザー</h1>
 
 <%= will_paginate %>
 
-<div class="items">
-  <% @users.each do |user| %>
-    <div class="one-item user">
-      <%= image_tag user.avatar.url, size: 150 %>
-      <%= link_to user.name, user %>
-      <% if user.voice_s? %>
-        <%= audio_tag user.voice_s.url %>
-      <% end %>
 
-      <% if user_signed_in? %>
-        <% if current_user.admin? && current_user =! user %>
-        | <%= link_to "delete", user, method: :delete, data: { confirm: "削除しますか?" } %>
-        <% end %>
-      <% end %>
+  <% @users.each do |user| %>
+    <div class="<%= item %> flex flex-col", id="user_<%= user.id %>">
+      <%= render user, user: user %>
     </div>
   <% end %>
-</div>
+
 
 <%= will_paginate %>

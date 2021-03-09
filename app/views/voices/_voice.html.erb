@@ -1,19 +1,46 @@
-<%= image_tag voice.user.avatar.url, size: 150 %>
-<h2><%= link_to "#{voice.work.title}", work_path(voice.work) %></h2>
-<%= link_to "#{voice.user.name}", user_path(voice.user) %>
-<%= audio_tag voice.voice_data.url %>
-<% if current_user %>
-  <% if current_user.voiceliked_by?(voice.id) %>
-    <td>
-      <%= link_to 'いいね済み', destroy_voicelike_path(voice), 
-                                method: :DELETE %>
-      <%= voice.voice_likes.count %>
-    </td>
-  <% else %>
-    <td>
-      <%= link_to 'いいね', create_voicelike_path(voice), 
-                            method: :POST %>
-      <%= voice.voice_likes.count %>
-    </td>
-  <% end %>
-<% end %>
+<div class="w-btnPx"> 
+  <%= image_tag voice.user.avatar.url %>
+  <div class="text-center mt-2">
+    <%= link_to voice.user.name, user_path(voice.user), data: {"turbolinks" => false} %>
+  </div>
+</div>
+
+<div class="w-2/3 ml-3">
+
+  <div class="<%= titleUnderLine %>">
+    <h2 class="<%= subTitle %>">
+      <%= link_to voice.work.title, work_path(voice.work), data: {"turbolinks" => false} %>
+    </h2>
+  </div>
+
+  <div class="px-10% pt-4">
+    <%= audio_tag voice.voice_data.url %>
+  </div>
+
+  <div class="pt-3 text-right">
+    <%= link_to voice_path(voice), class: "", data: {"turbolinks" => false} do %>
+      <i class="far fa-comment-alt"></i>
+    <% end %>
+    <%= voice.comments.count %>
+    <% if current_user %>
+      <% if current_user.voiceliked_by?(voice.id) %>
+        <td>
+          <%= link_to destroy_voicelike_path(voice), class:"pl-4",  method: :DELETE do %>
+            <i class="fas fa-heart"></i>
+          <% end %> 
+          <%= voice.voice_likes.count %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to create_voicelike_path(voice), class:"pl-4", method: :POST do %>
+            <i class="far fa-heart"></i>
+          <% end %>
+          <%= voice.voice_likes.count %>
+        </td>
+      <% end %>
+    <% end %>
+    <% if current_user == voice.user %>
+      <%= link_to '削除する', voice, method: :delete, data: { confirm: "削除しますか?"} %>
+    <% end %>
+  </div>
+</div>

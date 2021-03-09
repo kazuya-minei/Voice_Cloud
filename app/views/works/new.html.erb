@@ -1,25 +1,27 @@
-<h1 class="title">お題内容を記入</h1>
 
-<%= render 'shared/error_messages' %>
-<div class="Form">
+
+  <h1 class="<%= pageTitle %>">お題内容を記入</h1>
+  
+  <%= render 'shared/error_messages' %>
+
   <%= form_with(model: @work, local: true) do |f| %>
 
-
-    <div class="Form-Item">
-      <%= f.label :タイトル, class:"Form-Item-Label" %>
-      <%= f.text_field :title, class:"Form-Item-Input" %>
+    <div class="<%=form%>">
+      <%= f.label :タイトル, class:"text-add-text" %>
+      <%= f.text_field :title, class:formInput %>
     </div>
 
-    <div class="Form-Item">
-      <%= f.label :お題詳細, class:"Form-Item-Label" %>
-      <%= f.text_area :content, class:"Form-Item-Textarea work-text" %>
+    <div class="<%=form%>">
+      <%= f.label :お題詳細, class:"text-add-text" %>
+      <%= f.text_area :content, class:formInput %>
     </div>
 
     <div class="text-count">
       <p class="work-text-count"></p>
     </div>
 
-    <%= f.submit "投稿する", class:"Form-Btn", id:"submission" %>
+    <div class="<%= formBtn %>">
+      <%= f.submit "投稿する", class: submit, id:"submission" %>
+    </div>
 
   <% end %>
-</div>

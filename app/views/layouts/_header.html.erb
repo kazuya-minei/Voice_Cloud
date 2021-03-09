@@ -1,45 +1,126 @@
+<div class="fixed w-full z-50">
+  <header class="container mx-auto p-2 md:p-3">
+    <div class="flex justify-between items-center">
+
+      <h1 class="text-2xl md:text-2lg self-center text-center font-extrabold">
+        <%= link_to "Voice Cloud", root_path ,data: {"turbolinks" => false}, class:"text-add-logo" %>
+      </h1>
+  
+      <div @click="isOpen = !isOpen"  class="self-center z-50 lg:hidden">
+  
+        <div class="w-70 h-72 cursor-pointer fixed top-0 right-0 text-center">
+  
+          <div class="absolute top-16 left-20 w-32 h-2 duration-300 bg-gray-400" 
+              :class="isOpen ? 'transform translate-y-10px -rotate-45 bg-gray-600' : ''">
+          </div>
+  
+          <div class="absolute top-26 left-20 w-32 h-2 duration-300 bg-gray-500" 
+              :class="isOpen ? 'opacity-0' : ''">
+          </div>
+  
+          <div class="absolute top-36 left-20 w-32 h-2 duration-300 bg-gray-600" 
+              :class="isOpen ? 'transform -translate-y-10px rotate-45' : ''">
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
+    <transition 
+      name="menu"
+      enter-active-class="animated fadeInRight"
+      leave-active-class="animated fadeOutRight">
+
+      <div v-if="isOpen" class="py-8 px-4 fixed left-0 w-full 
+                                right-0 z-30 h-full overflow-y-scroll"> 
+  
+        <ul class="m-4 p-0">
+          <% if user_signed_in? %>
+  
+            <li class="<%= menuList %>">
+              <%= link_to "お題を投稿する", new_work_path,
+                                            data: {"turbolinks" => false},
+                                            class:menuLink %>
+            </li>
+  
+            <li class="<%= menuList %>">
+              <%= link_to "お題を探す", works_path, 
+                                        data: {"turbolinks" => false},
+                                        class:menuLink %>
+            </li>
+            
+            <li class="<%= menuList %>">
+              <%= link_to "投稿ボイス", voices_path,
+                                        data: {"turbolinks" => false},
+                                        class:menuLink %>
+            </li>
+
+            <li class="<%= menuList %>">
+              <%= link_to "声優を探す", users_path, 
+                                        data: {"turbolinks" => false},
+                                        class:menuLink %>
+            </li>
+
+            <li class="<%= menuList %>">
+              <%= link_to "いいねしたボイス", voicelikes_user_path(current_user), 
+                                              data: {"turbolinks" => false},
+                                              class:menuLink %>
+            </li>
+
+            <li class="<%= menuList %>">
+              <%= link_to "お気に入りしたお題", worklikes_user_path(current_user), 
+                                                data: {"turbolinks" => false},
+                                                class:menuLink %>
+            </li>
+
+            
+            <li class="<%= menuList %>">
+              <%= link_to "プロフィール", current_user, 
+                                          data: {"turbolinks" => false},
+                                          class:menuLink %>
+            </li>
+            
+            <li class="<%= menuList %>">
+              <%= link_to "プロフィール編集", edit_user_path(current_user), 
+                                              data: {"turbolinks" => false},
+                                              class:menuLink %>
+            </li>
+            
+            <li class="<%= menuList %>"> 
+              <%= link_to "ログアウト", logout_path, method: :delete, 
+                                        data: {"turbolinks" => false},
+                                        class:menuLink  %>
+            </li>
+  
+          <% else %>
+  
+            <li class="<%= menuList %>">
+              <%= link_to "ログイン", new_user_session_path, 
+                                      data: {"turbolinks" => false}, 
+                                      class:menuLink %>
+            </li>
+  
+            <li class="<%= menuList %>">
+              <%= link_to "新規登録", new_user_registration_path, 
+                                      data: {"turbolinks" => false}, 
+                                      class:menuLink %>
+            </li>
+  
+          <% end %>
+        </ul>
+      </div>
+
+    </transition>
+  </header>
+</div>
+
 <% if flash[:notice] %>
-  <div class="info messages2">
-    <p class="notice message"><%= notice %></p>
+  <div class="fixed mt-20 w-1/2 mx-messe bg-green-200 shadow py-2 border-t-2 border-b-2 border-green-500">
+    <p class="text-green-500 text-center"><%= notice %></p>
   </div>
 <% end %>
 <% if flash[:alert] %>
-  <div class="danger messages2">
-    <p class="alert message"><%= alert %></p>
+  <div class="fixed mt-20 w-1/2 mx-messe bg-red-200 shadow py-2 border-t-2 border-b-2 border-red-500">
+    <p class="text-red-500 text-center"><%= alert %></p>
   </div>
 <% end %>
-
-<header>
-  <h1 class="copy">  
-    <%= link_to "Voice Cloud", root_path %>
-  </h1>
-  <nav class="pc-nav">
-    <ul>
-      <% if user_signed_in? %>
-      
-        <li><%= link_to "お題を投稿する", new_work_path,
-                                          data: {"turbolinks" => false} %></li>
-
-        <li><%= link_to "お題を探す", works_path %></li>
-
-        <li><%= link_to "声優を探す", users_path, 
-                                      data: {"turbolinks" => false} %></li>
-
-        <li><%= link_to "投稿ボイス", voices_path,
-                                      data: {"turbolinks" => false} %></li>
-
-        <li><%= link_to "プロフィール", current_user, 
-                                        data: {"turbolinks" => false} %></li>
-
-        <li><%= link_to "プロフィール編集", edit_user_path(current_user), 
-                                            data: {"turbolinks" => false} %></li>
-
-        <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
-
-      <% else %>
-        <li><%= link_to "ログイン", new_user_session_path %></li><!--login_path-->
-        <li><%= link_to "新規登録", new_user_registration_path %></li>  <!--signup_path-->
-      <% end %>
-    </ul>
-  </nav>
-</header>

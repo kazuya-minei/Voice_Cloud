@@ -1,53 +1,84 @@
-<%= render 'shared/error_messages' %>
+  <%= render 'shared/error_messages' %>
+    
+  <div class="<%= item %>">
+    <div>
+      <h1 class="text-add-text text-xl mb-2 text-center font-semibold lg:text-2xl <%= titleUnderLine %>">
+        <%= @work.title %>
+      </h1>
+      
+      <p class="mb-4"><%= @work.content %></p>
 
-<div class="work">
-  <h1 class="title"><%= @work.title %></h1>
-  
-  <p><%= @work.content %></p>
-  <% if current_user == @work.user %>
-    <%= link_to "編集する", edit_work_path(@work), data: {"turbolinks" => false} %> 
-    <%= link_to "削除する", @work, method: :delete, data: { confirm: "削除しますか?"} %>
-  <% end %>
-</div>
-
-<div class="voice-form">
-  <%= form_with(model: [@work, @voice], local: true) do |f| %>
-    <%= f.hidden_field :work_id, value: @work.id %>
-    <div class="field">
-      <%= f.label :このお題に投稿する %>
-      <%= f.file_field :voice_data %>
-    </div>
-  
-    <%= f.submit "ボイス投稿", class:"Form-Btn", id:"submission" %>
-  <% end %> 
-</div>
-
-<div class="voice">
-  <% @voices.each do |voice| %>
-    <div class="one-item", id="voice_<%= voice.id %>">
-      <%= image_tag voice.user.avatar.url, size: 150 %>
-      <%= link_to voice.user.name, user_path(voice.user), data: {"turbolinks" => false}  %>
-      <%= audio_tag voice.voice_data.url %>
-      <%= link_to "コメント", voice_path(voice), data: {"turbolinks" => false} %>
-      <% if current_user %>
-        <% if current_user.voiceliked_by?(voice.id) %>
-          <td>
-            <%= link_to 'いいね済み', destroy_voicelike_path(voice), 
-                                      method: :DELETE %>
-            <%= voice.voice_likes.count %>
-          </td>
-        <% else %>
-          <td>
-            <%= link_to 'いいね', create_voicelike_path(voice), 
-                                  method: :POST %>
-            <%= voice.voice_likes.count %>
-          </td>
+      <div class="text-right opacity-50">
+        <% if current_user == @work.user %>
+          <%= link_to "編集する", edit_work_path(@work), data: {"turbolinks" => false} %> 
+          <%= link_to "削除する", @work, method: :delete, data: { confirm: "削除しますか?"} %>
         <% end %>
-      <% end %>
-      <% if current_user == voice.user %>
-        <%= link_to "ボイスを削除する", voice, method: :delete, data: { confirm: "ボイスを削除しますか?"} %>
-      <% end %>
+      </div>
     </div>
-  <% end %>
-</div>
+  </div>
+    
+  <div class="voice-form">
+    <%= form_with(model: [@work, @voice], local: true) do |f| %>
+      <%= f.hidden_field :work_id, value: @work.id %>
+      <div class="field text-center ">
+        <%= f.label :お題に投稿する, class:subTitle %>
+        <%= f.file_field :voice_data, class:"mt-4" %>
+      </div>
+    
+      <div class="<%= formBtn %> mt-4">
+        <%= f.submit "ボイス投稿", class:submit, id:"submission" %>
+      </div>
+    <% end %> 
+  </div>
+  
+  <div class="mt-8">
+    <% @voices.each do |voice| %>
+      <div class="<%= item %> flex", id="voice_<%= voice.id %>">
+        <div class="w-btnPx">
+          <%= image_tag voice.user.avatar.url, size: 150 %>
+          <div class="text-center mt-2">
+            <%= link_to voice.user.name, user_path(voice.user), data: {"turbolinks" => false}  %>
+          </div>
+        </div>
+        
+        <div class="w-2/3 ml-3 m-auto">
+          <div class="px-10% pt-4">
+            <%= audio_tag voice.voice_data.url %>
+          </div>
+          
+          <div class="text-center">
+            <%= link_to voice_path(voice), class: "", data: {"turbolinks" => false} do %>
+              <i class="far fa-comment-alt"></i>
+            <% end %>
+            <%= voice.comments.count %>
 
+            <% if current_user %>
+              <% if current_user.voiceliked_by?(voice.id) %>
+                <td>
+                  <%= link_to destroy_voicelike_path(voice), class:"pl-4",  method: :DELETE do %>
+                    <i class="fas fa-heart"></i>
+                  <% end %>    
+                  <%= voice.voice_likes.count %>
+                </td>
+              <% else %>
+                <td>
+                  <%= link_to create_voicelike_path(voice), class:"pl-4", method: :POST do %>
+                    <i class="far fa-heart"></i>
+                  <% end %>
+                  <%= voice.voice_likes.count %>
+                </td>
+              <% end %>
+            <% end %>
+          </div>
+
+          <% if current_user == voice.user %>
+            <div class="text-right">
+              <%= link_to '削除する', voice, method: :delete, data: { confirm: "ボイスを削除しますか?"} %>
+            </div>
+          <% end %>
+        </div>
+  
+      </div>
+    <% end %>
+  </div>
+  

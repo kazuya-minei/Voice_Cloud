@@ -1,13 +1,13 @@
-<h1 class="title">投稿ボイス</h1>
 
-<%= will_paginate %>
 
-  <div class="items">
+  <h1 class="<%= pageTitle %>">投稿ボイス</h1>
+  
+  <%= will_paginate %>
+  
     <% @voices.each do |voice| %>
-      <div class="one-item", id="voice_<%= voice.id %>">
+      <div class="<%= item %> flex", id="voice_<%= voice.id %>">
         <%= render 'voice', voice: voice %>
       </div>
     <% end %>
-  </div>
-
-<%= will_paginate %>
+  
+  <%= will_paginate %>

@@ -1,0 +1,16 @@
+<%= image_tag user.avatar.url, class:"w-2/5 h m-auto mb-2" %>
+<%= link_to user.name, user, class:subTitle, data: {"turbolinks" => false} %>
+<div class="text-center">
+  <%= user.followers.count %>フォロワー
+</div>
+<% if user.voice_s? %>
+  <div class="mt-2">
+    <%= audio_tag user.voice_s.url %>
+  </div>
+<% end %>
+
+<% if user_signed_in? %>
+  <% if current_user.admin? && current_user =! user %>
+  | <%= link_to "delete", user, method: :delete, data: { confirm: "削除しますか?" } %>
+  <% end %>
+<% end %>

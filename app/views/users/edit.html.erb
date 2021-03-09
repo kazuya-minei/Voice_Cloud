@@ -1,40 +1,43 @@
-<h1 class="title">プロフィール編集</h1>
 
-<%= render 'shared/error_messages' %>
-<div class="Form">
+
+  <h1 class="<%= pageTitle %>">プロフィール編集</h1>
+  
+  <%= render 'shared/error_messages' %>
+
   <%= form_with(model: @user, local: true) do |f| %>
 
 
-    <div class="Form-Item">
-      <%= f.label :名前, class:"Form-Item-Label" %>
-      <%= f.text_field :name, class:"Form-Item-Input" %>
+    <div class="<%=form%>">
+      <%= f.label :名前, class:"text-add-text" %>
+      <%= f.text_field :name, class:formInput %>
     </div>
 
-    <div class="Form-Item">
-      <%= f.label :メールアドレス, class:"Form-Item-Label" %>
-      <%= f.email_field :email, class:"Form-Item-Input" %>
+    <div class="<%=form%>">
+      <%= f.label :メールアドレス, class:"text-add-text" %>
+      <%= f.email_field :email, class:formInput %>
     </div>
 
-    <div class="Form-Item">
-      <%= f.label :紹介文, class:"Form-Item-Label" %>
-      <%= f.text_area :introduction_text, class:"Form-Item-Textarea user-text" %>
+    <div class="<%=form%>">
+      <%= f.label :紹介文, class:"text-add-text" %>
+      <%= f.text_area :introduction_text, class:formInput %>
     </div>
     <div class="text-count">
       <p class="user-text-count"></p>
     </div>
 
 
-    <div class="field">
+    <div class="text-add-text">
       <%= f.label :プロフィール画像 %>
       <%= f.file_field :avatar %>
     </div>
 
-    <div class="field">
+    <div class="text-add-text">
       <%= f.label :ボイスサンプル %>
       <%= f.file_field :voice_s %>
     </div>
 
-    <%= f.submit "編集する", class:"Form-Btn", id:"editing" %>
+    <div class="<%= formBtn %>">
+      <%= f.submit "編集する", class:submit , id:"editing" %>
+    </div>
 
   <% end %>
-</div>

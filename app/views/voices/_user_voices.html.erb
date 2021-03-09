@@ -1,22 +1,31 @@
 <% @user.voices.each do |voice| %>
-  <div class="voices">
-    <hi class="voice-title"><%= voice.work.title %></h1>
+  <div class="<%= item %>">
+    <h3 class="<%= subTitle %> border-b-2 border-add-text border-opacity-25 mb-2">
+      <%= link_to voice.work.title, voice.work, data: {"turbolinks" => false} %>
+    </h3>
     <%= audio_tag voice.voice_data.url %>
-    <%= link_to "コメント", voice_path(voice), data: {"turbolinks" => false} %>
+    <div class="text-right mr-2 mt-2">
+      <%= link_to voice_path(voice), class: "", data: {"turbolinks" => false} do %>
+        <i class="far fa-comment-alt"></i>
+      <% end %>
+      <%= voice.comments.count %>
       <% if current_user %>
         <% if current_user.voiceliked_by?(voice.id) %>
           <td>
-            <%= link_to 'いいね済み', destroy_voicelike_path(voice), 
-                                      method: :DELETE %>
+            <%= link_to destroy_voicelike_path(voice), class:"pl-4",  method: :DELETE do %>
+              <i class="fas fa-heart"></i>
+            <% end %> 
             <%= voice.voice_likes.count %>
           </td>
         <% else %>
           <td>
-            <%= link_to 'いいね', create_voicelike_path(voice), 
-                                  method: :POST %>
+            <%= link_to create_voicelike_path(voice), class:"pl-4", method: :POST do %>
+              <i class="far fa-heart"></i>
+            <% end %>
             <%= voice.voice_likes.count %>
           </td>
         <% end %>
       <% end %>
+    </div>
   </div>
 <% end %>

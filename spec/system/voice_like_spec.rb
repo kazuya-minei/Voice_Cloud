@@ -15,43 +15,43 @@ RSpec.feature "voice_like", type: :system, js: true do
     end 
 
     context 'ログイン済みの場合' do
-      before do
-        login kazuya 
-        visit voices_path
-      end
+      # before do
+      #   login kazuya 
+      #   visit voices_path
+      # end
 
-      it '「いいね」ボタンが表示されている' do
-        expect(page).to have_content "いいね"
-      end
+      # it '「いいね」ボタンが表示されている' do
+      #   expect(page).to have_content "いいね"
+      # end
 
-      it 'クリックで「いいね済み」に変化' do
-        click_link 'いいね'
-        expect(page).to have_content "いいね済み"
-      end
+      # it 'クリックで「いいね済み」に変化' do
+      #   click_link 'いいね'
+      #   expect(page).to have_content "いいね済み"
+      # end
 
-      it '自身のプロフィールページから行けるいいねボイスページに追加されている' do
-        click_link 'いいね'
-        expect(page).to have_content "いいね済み"
-        visit user_path(kazuya)
-        click_link 'いいねしたボイス'
-        expect(page).to have_content voice.work.title
-        expect(page).to have_content voice.work.content
-        expect(page).to have_content "いいね済み"
-      end
+      # it '自身のプロフィールページから行けるいいねボイスページに追加されている' do
+      #   click_link 'いいね'
+      #   expect(page).to have_content "いいね済み"
+      #   visit user_path(kazuya)
+      #   click_link 'いいねしたボイス'
+      #   expect(page).to have_content voice.work.title
+      #   expect(page).to have_content voice.work.content
+      #   expect(page).to have_content "いいね済み"
+      # end
     end
   end
 
   describe '#destroy' do
-    before do 
-      login kazuya
-      visit voices_path 
-      click_link 'いいね'
-      expect(page).to have_content "いいね済み"
-    end
+    # before do 
+    #   login kazuya
+    #   visit voices_path 
+    #   click_link 'いいね'
+    #   expect(page).to have_content "いいね済み"
+    # end
   
-    it '「いいね済み」をクリックで「いいね」に変化' do
-      click_link 'いいね済み' 
-      expect(page).to have_content "いいね"
-    end
+    # it '「いいね済み」をクリックで「いいね」に変化' do
+    #   click_link 'いいね済み' 
+    #   expect(page).to have_content "いいね"
+    # end
   end
 end

@@ -1,25 +1,25 @@
-<h1 class="title">お題内容を編集</h1>
+<h1 class="<%= pageTitle %>">お題内容を編集</h1>
 
 <%= render 'shared/error_messages' %>
-<div class="Form">
-  <%= form_with(model: @work, local: true) do |f| %>
 
-    
-    <div class="Form-Item">
-      <%= f.label :タイトル, class:"Form-Item-Label" %>
-      <%= f.text_field :title, class:"Form-Item-Input" %>
-    </div>
 
-    <div class="Form-Item">
-      <%= f.label :お題詳細, class:"Form-Item-Label" %>
-      <%= f.text_area :content, class:"Form-Item-Textarea work-text" %>
-    </div>
+<%= form_with(model: @work, local: true) do |f| %>
+  
+  <div class="<%=form%>">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title, class:formInput %>
+  </div>
 
-    <div class="text-count">
-      <p class="work-text-count"></p>
-    </div>
+  <div class="<%=form%>">
+    <%= f.label :お題詳細 %>
+    <%= f.text_area :content, class:formInput  %>
+  </div>
 
-    <%= f.submit "編集完了", class:"Form-Btn", id: "update" %>
+  <div class="text-count">
+    <p class="work-text-count"></p>
+  </div>
 
-  <% end %>
-</div>
+  <div class="<%= formBtn %>">
+    <%= f.submit "編集完了", class:submit , id: "update" %>
+  </div>
+<% end %>

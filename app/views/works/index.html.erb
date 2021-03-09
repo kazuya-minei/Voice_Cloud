@@ -1,13 +1,13 @@
-<h1 class="title">投稿お題</h1>
 
-<%= will_paginate %>
 
-  <div class="items">
+  <h1 class="<%=pageTitle%>">投稿お題</h1>
+  
+  <%= will_paginate %>
+  
     <% @works.each do |work| %> 
-      <div class="one-item", id="work_<%= work.id %>">
-        <%= render 'work', work: work %>
-      </div>
+        <div class="<%= item %>", id="work_<%= work.id %>">
+          <%= render 'work', work: work %>
+        </div>
     <% end %>
-  </div>
-
-<%= will_paginate %>
+  
+  <%= will_paginate %>

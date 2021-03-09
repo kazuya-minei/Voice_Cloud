@@ -11,6 +11,8 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px',
+      ss: '100px',
+      'maxLg': {'max': '1023px'},
     },
     colors: {
       transparent: 'transparent',
@@ -26,6 +28,14 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      add: {
+        'bg': '#d1cbc3',  //背景色
+        'logo': '#e65b20',  //ヘッダーロゴテキストカラー
+        'text': '#3e1300',  //テキストカラー
+        'btn': '#2a293e',  //Homeボタンカラー
+        'btnHover':  '#ffffff',  //Homeボタンホバー時カラー
+        'base': '#f7f4f2',  //アイテムカラー
+      },
     },
     spacing: {
       px: '1px',
@@ -53,7 +63,7 @@ module.exports = {
       28: '7rem',
       32: '8rem',
       36: '9rem',
-      40: '10rem',
+      10: '10rem',
       44: '11rem',
       48: '12rem',
       52: '13rem',
@@ -63,6 +73,19 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
+      27: '27rem',
+      34: '34rem',
+      40: '40rem',
+      '10px': '10px',
+      '10%': '10%',
+      btnTB: '20px',
+      btnRL: '30px',
+      Home: '1000px',
+      80: '80vh',
+      btnMd: '5%',
+      btnPx: '30%',
+      messe: '25%',
+      error: '16.5%',
     },
     animation: {
       none: 'none',
@@ -70,6 +93,7 @@ module.exports = {
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
+      wiggle: 'wiggle 1s ease-in-out infinite',
     },
     backgroundColor: (theme) => theme('colors'),
     backgroundImage: {
@@ -82,6 +106,7 @@ module.exports = {
       'gradient-to-bl': 'linear-gradient(to bottom left, var(--tw-gradient-stops))',
       'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
       'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
+      'main-visual': "url('/app/assets/images/main_visual.jpg')",
     },
     backgroundOpacity: (theme) => theme('opacity'),
     backgroundPosition: {
@@ -94,6 +119,7 @@ module.exports = {
       'right-bottom': 'right bottom',
       'right-top': 'right top',
       top: 'top',
+      main: '-70px',
     },
     backgroundSize: {
       auto: 'auto',
@@ -115,6 +141,7 @@ module.exports = {
       '2xl': '1rem',
       '3xl': '1.5rem',
       full: '9999px',
+      btn: '4px',
     },
     borderWidth: {
       DEFAULT: '1px',
@@ -132,6 +159,8 @@ module.exports = {
       '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       none: 'none',
+      btn:   'inset 0 0px 0px  2px rgba(30, 22, 54, 0.4)',
+      hover: 'inset 0 0px 0px 40px rgba(30, 22, 54, 0.7)',
     },
     container: {},
     cursor: {
@@ -354,6 +383,8 @@ module.exports = {
       '5/6': '83.333333%',
       full: '100%',
       screen: '100vh',
+      '72': '72px',
+      '2': '2px',
     }),
     inset: (theme, { negative }) => ({
       auto: 'auto',
@@ -365,6 +396,11 @@ module.exports = {
       '1/4': '25%',
       '2/4': '50%',
       '3/4': '75%',
+      '16': '16px',
+      '26': '26px',
+      '36': '36px',
+      '26': '26px',
+      '20': '20px',
       full: '100%',
       '-1/2': '-50%',
       '-1/3': '-33.333333%',
@@ -375,6 +411,10 @@ module.exports = {
       '-full': '-100%',
     }),
     keyframes: {
+      wiggle: {
+        '0%, 100%': { transform: 'rotate(-3deg)' },
+        '50%': { transform: 'rotate(3deg)' },
+        },
       spin: {
         to: {
           transform: 'rotate(360deg)',
@@ -440,6 +480,7 @@ module.exports = {
       ...theme('spacing'),
       full: '100%',
       screen: '100vh',
+      md: '80vh',
     }),
     maxWidth: (theme, { breakpoints }) => ({
       none: 'none',
@@ -459,6 +500,7 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       prose: '65ch',
+      btn: '180px',
       ...breakpoints(theme('screens')),
     }),
     minHeight: {
@@ -471,6 +513,7 @@ module.exports = {
       full: '100%',
       min: 'min-content',
       max: 'max-content',
+      375: '375px'
     },
     objectPosition: {
       bottom: 'bottom',
@@ -654,6 +697,7 @@ module.exports = {
       in: 'cubic-bezier(0.4, 0, 1, 1)',
       out: 'cubic-bezier(0, 0, 0.2, 1)',
       'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      'in-btn': 'cubic-bezier(0.390, 0.500, 0.150, 1.360)',
     },
     translate: (theme, { negative }) => ({
       ...theme('spacing'),
@@ -706,6 +750,9 @@ module.exports = {
       screen: '100vw',
       min: 'min-content',
       max: 'max-content',
+      '70': '70px',
+      '32': '32px',
+      '375': '375px',
     }),
     zIndex: {
       auto: 'auto',
@@ -857,5 +904,6 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/forms'),
   ],
 }

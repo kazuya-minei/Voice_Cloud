@@ -53,11 +53,11 @@ RSpec.feature "voice", type: :system do
     context "本人の場合" do
 
       it "削除リンクが表示されている" do
-        expect(page).to have_content 'ボイスを削除する'
+        expect(page).to have_content '削除する'
       end
 
       it "リンクをクリックで削除できる", js: true do
-        click_link 'ボイスを削除する'
+        click_link '削除する'
         expect{
           expect(page.accept_confirm).to eq "ボイスを削除しますか?"
           expect(page).to have_content "ボイスを削除しました"

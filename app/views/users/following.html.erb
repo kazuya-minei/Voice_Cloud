@@ -1,21 +1,17 @@
-<h1 class="title">フォロー</h1>
+<h1 class="<%= pageTitle %>">フォロー</h1>
 
 <%= will_paginate %>
 
 <% if @users.any? %>
   <div class="items">
     <% @users.each do |user| %>
-      <div class="one-item user">
-        <%= image_tag user.avatar.url, size: 150 %>
-        <%= link_to user.name, user %>
-        <% if user.voice_s? %>
-          <%= audio_tag user.voice_s.url %>
-        <% end %>
+      <div class="<%= item %> flex flex-col", id="user_<%= user.id %>">
+        <%= render user, user: user %>
       </div>
     <% end %>
   </div>
 <% else %>
-  <p class ="no-connection">現在フォロー中のユーザーはいません</p>
+  <p class ="<%= subTitle %>">現在フォロー中のユーザーはいません</p>
 <% end %>
   
 <%= will_paginate %>

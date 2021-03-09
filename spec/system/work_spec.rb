@@ -19,7 +19,7 @@ RSpec.feature "work", type: :system do
       background do
         login kazuya 
         visit new_work_path
-        fill_in 'work[title]',   with: 'new_work_title'
+        fill_in 'work[title]',   with: 'work_title'
         fill_in 'work[content]', with: 'a' * 1000
       end
 
@@ -42,10 +42,10 @@ RSpec.feature "work", type: :system do
         expect(page).to have_content 'タイトルを入力してください'
       end
 
-      it 'タイトルは21文字以上は投稿失敗' do
-        fill_in 'work[title]', with: 'a' * 21
+      it 'タイトルは13文字以上は投稿失敗' do
+        fill_in 'work[title]', with: 'a' * 13
         find('#submission').click
-        expect(page).to have_content 'タイトルは20文字以内で入力してください'
+        expect(page).to have_content 'タイトルは12文字以内で入力してください'
       end
 
       it 'お題詳細は空だと投稿失敗' do
@@ -80,11 +80,11 @@ RSpec.feature "work", type: :system do
       end
 
       it '正常に更新できる' do
-        fill_in 'work[title]', with: 'change work title'
+        fill_in 'work[title]', with: 'change title'
         fill_in 'work[content]', with: 'change work content' 
         find('#update').click
         expect(page).to have_content '募集内容を編集しました'
-        expect(page).to have_content 'change work title'
+        expect(page).to have_content 'change title'
         expect(page).to have_content 'change work content'
       end
 
