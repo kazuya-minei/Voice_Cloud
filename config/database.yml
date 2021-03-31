@@ -23,3 +23,6 @@ production:
   <<: *default
   # database: db/production.sqlite3 変更
   database: voicecloud_production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
