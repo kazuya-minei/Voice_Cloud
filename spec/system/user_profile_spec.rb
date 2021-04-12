@@ -8,7 +8,7 @@ RSpec.feature "user_profile", type: :system do
   describe 'update' do
     context '本人の場合' do
       background do 
-        login kazuya
+        login_as kazuya
         visit edit_user_path kazuya	
       end
 
@@ -34,7 +34,7 @@ RSpec.feature "user_profile", type: :system do
 
     context "本人ではない場合" do
       background do
-        login kazuma
+        login_as kazuma
         visit edit_user_path kazuya
       end
 

@@ -1,28 +1,21 @@
 default: &default
-  # adapter: sqlite3 変更
   adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  encoding: unicode # 追加
-  username: voicecloud # 追加
-  password:       # 追加
-  host: localhost # 追加
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password
+  pool: 5
 
 development:
   <<: *default
-  # database: db/development.sqlite3 変更
   database: voicecloud_development
 
 test:
   <<: *default
-  # database: db/test.sqlite3 変更
   database: voicecloud_test
 
-# Herokuデプロイ時に再度見直す
-production:
+production: 
   <<: *default
-  # database: db/production.sqlite3 変更
   database: voicecloud_production
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  username: postgres
+  password: password

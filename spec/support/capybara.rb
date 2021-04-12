@@ -2,32 +2,33 @@ require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'capybara/rails'
 
-Capybara.configure do |config|
+Capybara.register_driver :chrome_headless do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
 
-  config.default_driver = :chrome
-  config.javascript_driver = :chrome
-  config.run_server = true
-  config.default_selector = :css 
-  config.default_max_wait_time = 5  
-  config.ignore_hidden_elements = true
-  config.save_path = Dir.pwd     
-  config.automatic_label_click = false 
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
-Capybara.register_driver :chrome do |app|
+Capybara.javascript_driver = :chrome_headless
 
-  options = Selenium::WebDriver::Chrome::Options.new
+RSpec.configure do |config|
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
 
-  options.add_argument('disable-notifications')       
-  options.add_argument('disable-translate')          
-  options.add_argument('disable-extensions')         
-  options.add_argument('disable-infobars')           
-  options.add_argument('window-size=1280,960')        
-
-
-  # ブラウザーを起動する
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    options: options)
+  config.before(:each, type: :system, js: true) do
+    if ENV["SELENIUM_DRIVER_URL"].present?
+      driven_by :selenium, using: :chrome, options: {
+        browser: :remote,
+        url: ENV.fetch("SELENIUM_DRIVER_URL"),
+        desired_capabilities: :chrome
+      }
+    else
+      driven_by :selenium_chrome_headless
+    end
+  end
 end

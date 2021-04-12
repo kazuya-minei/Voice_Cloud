@@ -24,7 +24,7 @@ RSpec.feature "rekationship", type: :system do
 
     it "ユーザーをフォロー/フォロー解除できる", js: true do
       # kazuyaでログイン
-      login kazuya  
+      login_as kazuya  
 
       # kazumaをフォローしにいく
       visit user_path kazuma
@@ -62,7 +62,7 @@ RSpec.feature "rekationship", type: :system do
     describe "フォロー/フォロワーの有無で一覧ページの表示が変わる" do
       context "フォロー/フォロワーが0の時" do
         background do
-          login kazuya
+          login_as kazuya
           visit user_path kazuya
         end
 
