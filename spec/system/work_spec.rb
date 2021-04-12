@@ -17,7 +17,7 @@ RSpec.feature "work", type: :system do
 
     context '入力が正しい場合' do
       background do
-        login kazuya 
+        login_as kazuya 
         visit new_work_path
         fill_in 'work[title]',   with: 'work_title'
         fill_in 'work[content]', with: 'a' * 1000
@@ -32,7 +32,7 @@ RSpec.feature "work", type: :system do
     context '入力が不正な場合' do
 
       background do
-        login kazuya
+        login_as kazuya
         visit new_work_path
       end
 
@@ -66,7 +66,7 @@ RSpec.feature "work", type: :system do
 
     context '本人の場合' do
       background do
-        login kazuya
+        login_as kazuya
         visit edit_work_path work
       end
 
@@ -100,7 +100,7 @@ RSpec.feature "work", type: :system do
 
     context '本人ではない場合' do
       background do
-        login kazuma
+        login_as kazuma
       end
 
       it '詳細ページに編集リンクは表示されない' do
@@ -119,7 +119,7 @@ RSpec.feature "work", type: :system do
 
     context '本人の場合' do
       background do
-        login kazuya
+        login_as kazuya
         visit work_path work
       end
 
@@ -136,7 +136,7 @@ RSpec.feature "work", type: :system do
 
     context '本人ではない場合' do
       background do
-        login kazuma
+        login_as kazuma
         visit work_path work
       end
 

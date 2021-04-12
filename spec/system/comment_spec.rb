@@ -17,7 +17,7 @@ RSpec.feature "comment", type: :system do
 
     context "ログイン済みの場合" do
       background do
-        login kazuya
+        login_as kazuya
         visit voice_path(voice)
       end
 
@@ -54,7 +54,7 @@ RSpec.feature "comment", type: :system do
 
     context "本人の場合" do
       background do
-        login kazuya
+        login_as kazuya
         visit voice_path(voice)
       end
 
@@ -73,7 +73,7 @@ RSpec.feature "comment", type: :system do
 
     context "本人ではない場合" do
       background do
-        login kazuma
+        login_as kazuma
         visit voice_path(voice)
       end
       

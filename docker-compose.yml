@@ -1,0 +1,52 @@
+version: '3.9'
+services:
+  web: &web_base
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      RAILS_ENV: development
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+      WEBPACKER_DEV_SERVER_PUBLIC: example.local:3035 
+      WEBPACKER_DEV_SERVER_INLINE: "true"
+      WEBPACKER_DEV_SERVER_HMR: "false" 
+    command: bundle exec rails s -p 3000 -b '0.0.0.0' 
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db 
+      - chrome
+    ports:
+      - "3000:3000" 
+    volumes:
+      - .:/voice-cloud 
+  webpack:
+    <<: *web_base
+    command: bash -c "rm -rf /app/public/packs; bin/webpack-dev-server"
+    ports:
+      - "3035:3035"
+    depends_on:
+      - web
+    tty: false
+    stdin_open: false
+  db:
+    image: postgres
+    ports:
+      - '5432:5432' 
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_PASSWORD=password
+  chrome:
+    image: selenium/standalone-chrome:latest
+    logging:
+      driver: none
+  smtp: 
+    image: schickling/mailcatcher
+    ports: 
+      - '1080:1080'
+      - '1025:1025'
+volumes:
+  postgresql-data:
+    driver: local
+  

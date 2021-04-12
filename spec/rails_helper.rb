@@ -3,6 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
@@ -22,11 +23,7 @@ require 'rspec/rails'
 # require only the support files necessary.
 #
 require 'devise'
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
-RSpec.configure do |config|
-  config.include WorkMacros
-  config.include LoginMacros
-end
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -37,10 +34,6 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  config.include Devise::Test::IntegrationHelpers, type: :request  #deviseのヘルパーを使えるように
-  config.include Devise::Test::ControllerHelpers, type: :controller 
-  config.include Devise::Test::ControllerHelpers, type: :view
-  config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -49,9 +42,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
-
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -59,7 +49,7 @@ RSpec.configure do |config|
   # You can disable this behaviour by removing the line below, and instead
   # explicitly tag your specs with their type, e.g.:
   #
-  #     RSpec.describe UsersController, type: :controller do
+  #     RSpec.describe UsersController, :type => :controller do
   #       # ...
   #     end
   #
@@ -71,7 +61,14 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.before(:each) do |example|  #JSを使う必要があるテストにだけ、js: trueのタグを付ける。
+end
+
+RSpec.configure do |config|
+  config.include Devise::Test::IntegrationHelpers, type: :request # sign_in/sign_outヘルパーの使用
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include FactoryBot::Syntax::Methods # FactoryBot(FactoryBot省略)の使用
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.before(:each) do |example| # system specの設定 (js使用時はテスト名に ,js: trueと追記する)
     if example.metadata[:type] == :system
       if example.metadata[:js]
         driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
@@ -79,5 +76,35 @@ RSpec.configure do |config|
         driven_by :rack_test
       end
     end
+  end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+end
+
+Capybara.register_driver :remote_chrome do |app|
+  url = "http://chrome:4444/wd/hub"
+  caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
+    "goog:chromeOptions" => {
+      "args" => [
+        "no-sandbox",
+        "headless",
+        "disable-gpu",
+        "window-size=1680,1050",
+      ],
+    }
+  )
+  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
+end
+RSpec.configure do |config|
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+  config.before(:each, type: :system, js: true) do
+    driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 3000
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
 end

@@ -1,4 +1,4 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker');
 
 const webpack = require('webpack')    //jQueryを管理下として認定
 environment.plugins.prepend('Provide',

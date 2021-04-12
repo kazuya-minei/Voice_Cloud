@@ -15,7 +15,7 @@ RSpec.feature "voice", type: :system do
 
     context "ログイン済みの場合" do
       background do
-        login kazuya
+        login_as kazuya
         visit work_path(work)
       end
 
@@ -44,7 +44,7 @@ RSpec.feature "voice", type: :system do
 
   describe "destroy" do
     background do
-      login kazuya
+      login_as kazuya
       visit work_path(work)
       attach_file 'voice[voice_data]', "#{Rails.root}/spec/fixtures/testvoice.mp3"
       find('#submission').click
@@ -68,7 +68,7 @@ RSpec.feature "voice", type: :system do
     context "本人ではない場合" do
       background do
         click_link 'ログアウト'
-        login kazuma
+        login_as kazuma
         visit work_path(work)
       end
 

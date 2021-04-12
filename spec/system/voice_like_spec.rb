@@ -16,7 +16,7 @@ RSpec.feature "voice_like", type: :system, js: true do
 
     context 'ログイン済みの場合' do
       # before do
-      #   login kazuya 
+      #   login_as kazuya 
       #   visit voices_path
       # end
 
@@ -43,7 +43,7 @@ RSpec.feature "voice_like", type: :system, js: true do
 
   describe '#destroy' do
     # before do 
-    #   login kazuya
+    #   login_as kazuya
     #   visit voices_path 
     #   click_link 'いいね'
     #   expect(page).to have_content "いいね済み"

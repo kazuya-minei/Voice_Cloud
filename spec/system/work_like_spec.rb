@@ -15,7 +15,7 @@ RSpec.feature "work_like", type: :system, js: true do
 
     context 'ログイン済みの場合' do
       before do
-        login kazuya 
+        login_as kazuya 
         visit works_path
       end
 
@@ -42,7 +42,7 @@ RSpec.feature "work_like", type: :system, js: true do
 
   # describe '#destroy' do
   #   before do 
-  #     login kazuya
+  #     login_as kazuya
   #     visit works_path 
   #     click_link 'お気に入り'
   #     expect(page).to have_content "お気に入り済み"
