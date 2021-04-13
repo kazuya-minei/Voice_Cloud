@@ -11,6 +11,7 @@ RUN apt-get update -qq -y && \
     apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
+    nodejs \
     wget \
     ca-certificates \
     $BUILD_PACKAGES \
@@ -18,6 +19,8 @@ RUN apt-get update -qq -y && \
     $RUBY_PACKAGES \
     libfontconfig1 && \
     rm -rf /var/lib/apt/lists/*
+
+ENV RAILS_ROOT /voice-cloud
 
 ENV ENTRYKIT_VERSION 0.4.0
 
@@ -41,17 +44,18 @@ ENV BUNDLE_JOBS=4 \
     APP_DIR=/app/ \
     BUNDLE_PATH=/bundle/
 
-RUN mkdir $APP_DIR
+RUN mkdir -p $RAILS_ROOT
 
-WORKDIR $APP_DIR
+WORKDIR $RAILS_ROOT
 
-COPY ./Gemfile $APP_DIR
-COPY ./Gemfile.lock $APP_DIR
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
 RUN gem install bundler
 RUN bundle config build.nokogiri --use-system-libraries
-RUN bundle install --no-deployment --quiet --path /bundle
+RUN bundle install --no-deployment --jobs 20 --retry 5 --without production --quiet --path /bundle
 RUN yarn install --check-files
-COPY ./ $APP_DIR
+COPY . .
+RUN mkdir -p tmp/sockets
 
 CMD [ \
     "prehook", "rm /app/tmp/pids/server.pid" \
