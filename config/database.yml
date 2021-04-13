@@ -4,7 +4,7 @@ default: &default
   host: db
   username: postgres
   password: password
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
@@ -17,5 +17,6 @@ test:
 production: 
   <<: *default
   database: voicecloud_production
-  username: postgres
-  password: password
+  host: <%= ['DB_HOST'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

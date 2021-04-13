@@ -1,42 +1,51 @@
 version: '3.9'
+volumes:
+  postgres_data:
+  public_data:
+  tmp_data:
+  log_data:
 services:
-  web: &web_base
+  app: &app_base
     build:
       context: .
-      dockerfile: Dockerfile
-    environment:
-      RAILS_ENV: development
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
-      WEBPACKER_DEV_SERVER_PUBLIC: example.local:3035 
-      WEBPACKER_DEV_SERVER_INLINE: "true"
-      WEBPACKER_DEV_SERVER_HMR: "false" 
-    command: bundle exec rails s -p 3000 -b '0.0.0.0' 
-    tty: true
-    stdin_open: true
-    depends_on:
-      - db 
-      - chrome
-    ports:
-      - "3000:3000" 
+      dockerfile: ./Docker/app/Dockerfile
+    command: bundle exec puma -C config/puma.rb
+    
     volumes:
-      - .:/voice-cloud 
+      - .:/voice-cloud
+      - public_data:/voice-cloud/public
+      - tmp_data:/voice-cloud/tmp
+      - log_data:/voice-cloud/log
+    depends_on:
+      - db
   webpack:
-    <<: *web_base
+    <<: *app_base
     command: bash -c "rm -rf /app/public/packs; bin/webpack-dev-server"
     ports:
       - "3035:3035"
     depends_on:
-      - web
+      - app
     tty: false
     stdin_open: false
   db:
-    image: postgres
-    ports:
-      - '5432:5432' 
-    volumes:
-      - postgresql-data:/var/lib/postgresql/data
+    build:
+        context: .
+        dockerfile: ./Docker/db/Dockerfile
     environment:
-    - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      dockerfile: ./Docker/web/Dockerfile
+    volumes:
+      - public_data:/voice-cloud/public
+      - tmp_data:/voice-cloud/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - app
   chrome:
     image: selenium/standalone-chrome:latest
     logging:
@@ -46,7 +55,3 @@ services:
     ports: 
       - '1080:1080'
       - '1025:1025'
-volumes:
-  postgresql-data:
-    driver: local
-  
