@@ -16,7 +16,7 @@ test:
 
 production: 
   <<: *default
-  database: voicecloud_production
-  host: <%= ['DB_HOST'] %>
+  database: <%= ENV['DB'] %>
+  host: <%= ENV['DB_HOST'] %>
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
