@@ -1,57 +1,43 @@
-version: '3.9'
+version: '3.2'
+
 volumes:
-  postgres_data:
-  public_data:
-  tmp_data:
-  log_data:
+  dbdata:
+    driver: local
+
 services:
-  app: &app_base
-    build:
-      context: .
-      dockerfile: ./Docker/app/Dockerfile
-    command: bundle exec puma -C config/puma.rb
-    
+  db:
+    image: postgres:11
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     volumes:
-      - .:/voice-cloud
-      - public_data:/voice-cloud/public
-      - tmp_data:/voice-cloud/tmp
-      - log_data:/voice-cloud/log
+      - dbdata:/var/lib/postgresql/data/pgdata
+
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      RAILS_ENV: development
+      RACK_ENV: development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      WEBPACKER_DEV_SERVER_HOST: webpack
+    volumes:
+      - .:/usr/src/app
     depends_on:
       - db
+      - webpack
   webpack:
-    <<: *app_base
-    command: bash -c "rm -rf /app/public/packs; bin/webpack-dev-server"
+    build: .
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/usr/src/app
     ports:
-      - "3035:3035"
-    depends_on:
-      - app
-    tty: false
-    stdin_open: false
-  db:
-    build:
-        context: .
-        dockerfile: ./Docker/db/Dockerfile
+      - '3035:3035'
     environment:
-      - POSTGRES_PASSWORD=password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-  web:
-    build:
-      context: .
-      dockerfile: ./Docker/web/Dockerfile
-    volumes:
-      - public_data:/voice-cloud/public
-      - tmp_data:/voice-cloud/tmp
-    ports:
-      - 80:80
-    depends_on:
-      - app
-  chrome:
-    image: selenium/standalone-chrome:latest
-    logging:
-      driver: none
-  smtp: 
-    image: schickling/mailcatcher
-    ports: 
-      - '1080:1080'
-      - '1025:1025'
+      NODE_ENV: development
+      RAILS_ENV: development
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0

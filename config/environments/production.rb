@@ -122,13 +122,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     #gmail利用時はaddress,domain,portは下記で固定
-    address:"smtp.gmail.com",
-    domain:'gmail.com',
+    address: 'smtp.gmail.com',
+    domain: 'gmail.com',
     port:587,
     user_name:ACTION_MAILER_ADDRESS,
     password:ACTION_MEILER_PASSWORD,
     #パスワードをBase64でエンコード
-    authentication: :login
-    enable_starttls_auto:true
+    authentication: 'login',
+    enable_starttls_auto: true
   }
 end

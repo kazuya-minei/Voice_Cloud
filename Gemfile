@@ -25,8 +25,6 @@ gem 'will_paginate',           '3.1.8'
 
 gem 'bootstrap-will_paginate', '1.0.0'
 
-gem 'rails-controller-testing'
-
 gem 'devise'
 
 gem 'mimemagic', '~> 0.3.6 '
