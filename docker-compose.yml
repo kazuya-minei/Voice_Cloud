@@ -18,7 +18,8 @@ services:
     build: .
     ports:
       - '3000:3000'
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "bundle exec puma && /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf"
     environment:
       RAILS_ENV: development
       RACK_ENV: development
@@ -26,7 +27,7 @@ services:
       POSTGRES_PASSWORD: password
       WEBPACKER_DEV_SERVER_HOST: webpack
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/voice-cloud
     depends_on:
       - db
       - webpack
@@ -34,7 +35,7 @@ services:
     build: .
     command: ./bin/webpack-dev-server
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/voice-cloud
     ports:
       - '3035:3035'
     environment:
