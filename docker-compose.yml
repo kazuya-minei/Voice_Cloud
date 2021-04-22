@@ -1,6 +1,9 @@
-version: '3.2'
+version: '3.7'
 
 volumes:
+  public-data:
+  tmp-data:
+  log-data:
   dbdata:
     driver: local
 
@@ -14,23 +17,38 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data/pgdata
 
-  web:
-    build: .
-    ports:
-      - '3000:3000'
-    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    command: bash -c "bundle exec puma && /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf"
+  app:
+    build: 
+      context: .
+    command: bundle exec puma -C config/puma.rb
     environment:
       RAILS_ENV: development
       RACK_ENV: development
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      WEBPACKER_DEV_SERVER_HOST: webpack
     volumes:
       - .:/voice_cloud
+      - public-data:/voice_cloud/public
+      - tmp-data:/voice_cloud/tmp
+      - log-data:/voice_cloud/log
     depends_on:
       - db
       - webpack
+  web: 
+    build: 
+      context: containers/nginx
+    volumes: 
+      - .:/voice_cloud
+      - public-data:/voice_cloud/public 
+      - tmp-data:/voice_cloud/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - app
+      - webpack
+    environment: 
+      WEBPACKER_DEV_SERVER_HOST: webpack
+
   webpack:
     build: .
     command: ./bin/webpack-dev-server
