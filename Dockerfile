@@ -13,11 +13,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 # Install Yarn
 && apt-get install yarn -y
 
-ADD nginx.conf /etc/nginx/sites-available/app.conf
-RUN rm -f /etc/nginx/sites-enabled/default \
-&& ln -s /etc/nginx/sites-available/voice_cloud.conf /etc/nginx/sites-enabled/voice_cloud.conf
-
-ADD . /voice_cloud
+RUN mkdir /voice_cloud
 WORKDIR /voice_cloud
 
 COPY initdb.sql /docker-entrypoint-initdb.d/.
@@ -29,6 +25,9 @@ COPY Gemfile.lock /voice_cloud/Gemfile.lock
 
 RUN gem install bundler \
 && bundle \
-&& mkdir -p voice_cloud/tmp/sockets
+&& . /voice_cloud \
+&& mkdir -p tmp/sockets
 
-CMD ./docker-entrypoint.sh
+ADD entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
