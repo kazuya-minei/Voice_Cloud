@@ -15,20 +15,20 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 ADD nginx.conf /etc/nginx/sites-available/app.conf
 RUN rm -f /etc/nginx/sites-enabled/default \
-&& ln -s /etc/nginx/sites-available/voice-cloud.conf /etc/nginx/sites-enabled/voice-cloud.conf
+&& ln -s /etc/nginx/sites-available/voice_cloud.conf /etc/nginx/sites-enabled/voice_cloud.conf
 
-ADD . /usr/src/voice-cloud
-WORKDIR /usr/src/voice-cloud
+ADD . /voice_cloud
+WORKDIR /voice_cloud
 
 COPY initdb.sql /docker-entrypoint-initdb.d/.
 
 # Install & run bundler
 
-COPY Gemfile /voice-cloud/Gemfile
-COPY Gemfile.lock /voice-cloud/Gemfile.lock
+COPY Gemfile /voice_cloud/Gemfile
+COPY Gemfile.lock /voice_cloud/Gemfile.lock
 
 RUN gem install bundler \
 && bundle \
-&& mkdir -p voice-cloud/tmp/sockets
+&& mkdir -p voice_cloud/tmp/sockets
 
 CMD ./docker-entrypoint.sh

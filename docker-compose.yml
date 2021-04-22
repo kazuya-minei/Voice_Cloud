@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: password
       WEBPACKER_DEV_SERVER_HOST: webpack
     volumes:
-      - .:/usr/src/voice-cloud
+      - .:/voice_cloud
     depends_on:
       - db
       - webpack
@@ -35,7 +35,7 @@ services:
     build: .
     command: ./bin/webpack-dev-server
     volumes:
-      - .:/usr/src/voice-cloud
+      - .:/voice_cloud
     ports:
       - '3035:3035'
     environment:
