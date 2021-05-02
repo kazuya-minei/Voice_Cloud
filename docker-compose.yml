@@ -7,6 +7,10 @@ volumes:
   dbdata:
     driver: local
 
+networks:
+  vc_net:
+    external: true    
+
 services:
   db:
     image: postgres:11

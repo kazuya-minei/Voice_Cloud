@@ -1,24 +1,33 @@
-# README
+# Voice Cloud
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# URL
+http://voicecloud.work
 
-Things you may want to cover:
+# 概要
+声で繋がるSNSサービスです。
+誰かが投稿した「私が考えたセリフを読み上げてほしい」「この文章を朗読してください」等の、
+「お題」に対し、録音したファイルを投稿し共有出来ます。
+また、プロフィールページではサンプルボイスの設定なども出来、自信のプロフィールとして他の人に共有することも出来ます。
+他のSNSなどのように「お題」「ボイス投稿」に対するいいね・コメント・ユーザーに対するフォロー機能も備えています。
 
-* Ruby version
+開発環境と本番環境にDocker、インフラにAWSを利用しています。
 
-* System dependencies
+# 使用言語
+Ruby 2.6.6, Rails 6.1.3  
+JavaScript(Vue.js), HTML5, TailwindCSS
 
-* Configuration
+# ER図
 
-* Database creation
 
-* Database initialization
+# サービス構成図
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+# 機能
 
-* Deployment instructions
 
-* ...
+# 今後の改善点
+## 機能面
+- 検索機能の実装
+- 
+## デザイン面
+- エラー、インフォメッセージのデザイン改善
