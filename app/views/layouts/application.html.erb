@@ -5,17 +5,29 @@
   </head>
 
 
-  <body class="bg-add-bg">
+  <body class="bg-add-bg text-center">
     <div id="app">
       <%= render 'layouts/header' %>
     </div>
     
     <% if current_page?(root_path) %>
-      <%= yield %>  
+
+      <%= yield %> 
+
     <% else %>
+
+      <% if current_user != nil %>
+        <%= render 'shared/right'  %>
+      <% end %>
+
       <div class="<%= page %>">
         <%= yield %>  
       </div>
+
+      <% if current_user != nil %>
+        <%= render 'shared/left'  %>
+      <% end %>
+       
     <% end %>
       
     <%= render 'layouts/footer' %>
@@ -32,3 +44,4 @@
     </script>
   </body>
 </html>
+

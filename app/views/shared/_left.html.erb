@@ -1,0 +1,16 @@
+<div class="maxLg:hidden font-sans text-sm rounded text-add-text inline-block fixed top-1/4 left-32">
+  <ul class="ml-6">
+    <li class="pt-4 pb-1 border-b border-add-text duration-150 ease-linear hover:bg-add-base">
+      <%= link_to "プロフィール編集", edit_user_path(current_user), data: {"turbolinks" => false}, class:"m-4 my-4" %>
+    </li>
+    <li class="pt-4 pb-1 border-b border-add-text duration-150 ease-linear hover:bg-add-base">
+      <%= link_to "お気に入りしたお題", worklikes_user_path(current_user), data: {"turbolinks" => false}, class:"m-4 my-4" %>
+    </li>
+    <li class="pt-4 pb-1 border-b border-add-text duration-150 ease-linear hover:bg-add-base">
+      <%= link_to "いいねしたボイス", voicelikes_user_path(current_user), data: {"turbolinks" => false}, class:"m-4 my-4" %>
+    </li>
+    <li class="pt-4 pb-1 border-b border-add-text duration-150 ease-linear hover:bg-add-base">
+      <%= link_to "ログアウト", logout_path, method: :delete, data: {"turbolinks" => false}, class:"m-4 my-4" %>
+    </li>
+  </ul>
+</div>
