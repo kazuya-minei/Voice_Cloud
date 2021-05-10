@@ -24,9 +24,17 @@
 #                password_confirmation: password)
 # end
 
-users = User.order(:created_at).take(6)
-50.times do
-  title = Faker::Lorem.sentence(word_count: 1)
-  content = Faker::Lorem.sentence(word_count: 6)
-  users.each { |user| user.works.create!(title: title, content: content) }
+# users = User.order(:created_at).take(6)
+# 50.times do
+#   title = Faker::Lorem.sentence(word_count: 1)
+#   content = Faker::Lorem.sentence(word_count: 6)
+#   users.each { |user| user.works.create!(title: title, content: content) }
+# end
+
+5.times do |n|
+  User.create!(
+    email: "test#{n + 1}@test.com",
+    name: "テストユーザー#{n + 1}",
+    password: "password"
+  )
 end
